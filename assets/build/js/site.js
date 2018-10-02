@@ -1,0 +1,2 @@
+var testJS="this shit should be first, I hope";
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNpdGUuanMiXSwibmFtZXMiOlsidGVzdEpTIl0sIm1hcHBpbmdzIjoiQUFBQSxHQUFJQSxRQUFTIiwiZmlsZSI6InNpdGUuanMiLCJzb3VyY2VzQ29udGVudCI6WyJ2YXIgdGVzdEpTID0gXCJ0aGlzIHNoaXQgc2hvdWxkIGJlIGZpcnN0LCBJIGhvcGVcIjtcbiJdfQ==

@@ -1,0 +1,38 @@
+//color=======================================
+$base-color: hsla(200, 3%, 67%, 1);
+$main-color: hsla(43, 78%, 53%, 1);
+$accent-color: hsla(6, 100%, 50%, 1);
+
+$white       : scale-color($base-color, $lightness: 100%);
+$white-1     : scale-color($base-color, $lightness: 99%);
+$white-2     : scale-color($base-color, $lightness: 95%);
+$white-3     : scale-color($base-color, $lightness: 85%);
+$white-4     : scale-color($base-color, $lightness: 70%);
+$white-5     : scale-color($base-color, $lightness: 39%);
+$grey        : scale-color($base-color, $lightness: 0%);
+$black-1     : scale-color($base-color, $lightness: -15%);
+$black-2     : scale-color($base-color, $lightness: -30%);
+$black-3     : scale-color($base-color, $lightness: -57%);
+$black-4     : scale-color($base-color, $lightness: -70%);
+$black-5     : scale-color($base-color, $lightness: -85%);
+$black       : scale-color($base-color, $lightness: -100%);
+//================MAIN COLOR===================
+$c-main-1    : scale-color($main-color, $lightness: 90%);
+$c-main-2    : scale-color($main-color, $lightness: 70%);
+$c-main-3    : scale-color($main-color, $lightness: 39%);
+$main        : scale-color($main-color, $lightness: 0%);
+$c-main-4    : scale-color($main-color, $lightness: -20%);
+$c-main-5    : scale-color($main-color, $lightness: -40%);
+$c-main-6    : scale-color($main-color, $lightness: -60%);
+//==================ACcENT=====================
+$c-accent-1  : scale-color($accent-color, $lightness: 75%);
+$c-accent-2  : scale-color($accent-color, $lightness: 45%);
+$c-accent    : scale-color($accent-color, $lightness: 0%);
+$c-accent-3  : scale-color($accent-color, $lightness: -40%);
+$c-accent-4  : scale-color($accent-color, $lightness: -60%);
+
+//Fonts============================================
+$body-font: sans-serif;
+$heading-font: serif;
+
+
