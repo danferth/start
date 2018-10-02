@@ -1,26 +1,30 @@
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+```
+____________              _____ 
+__  ___/_  /______ _________  /_
+_____ \_  __/  __ `/_  ___/  __/
+____/ // /_ / /_/ /_  /   / /_  
+/____/ \__/ \__,_/ /_/    \__/  
+----------------------------------------------------------------- 
+```                                
 
 
-Hi there! Welcome to Cloud9 IDE!
+Just a basic boilerplate to start a website.
 
-To get you started, we included a small hello world application.
+- It's got the `GULP`
+- It has a file or two
+- I set up the head and foot in `PHP`
+- so many pages on the easy
+- `SCSS` variables are made for color and font
+- added `GSAP` and `FontAwesome` just cause their awesome
+- and `swal2`, I ain't reinventing the wheel for a popup
 
-1) Open the hello-world.html file
+You can use this if you want', I use Cloud9 for an IDE:
 
-2) Click on the Preview button to open a live preview pane
+- clone this repo into a new project
+- run `npm install`
+- run `gulp watch`
+- start
 
-3) Make some changes to the file, save, watch the preview, and have fun!
-
-Happy coding!
-The Cloud9 IDE team
+You can also use `gulp help` to display all the functions set up in `gulpfile.js`
 
 
-## Support & Documentation
-
-Visit http://docs.c9.io for documentation, or http://support.c9.io for support.
-To watch some training videos, visit http://www.youtube.com/user/c9ide
