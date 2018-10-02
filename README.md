@@ -18,7 +18,7 @@ Just a basic boilerplate to start a website.
 - added `GSAP` and `FontAwesome` just cause their awesome
 - and `swal2`, I ain't reinventing the wheel for a popup
 
-You can use this if you want', I use Cloud9 for an IDE:
+You can use this if you want, I use Cloud9 for an IDE:
 
 - clone this repo into a new project
 - run `npm install`

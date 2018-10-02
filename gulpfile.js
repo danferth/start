@@ -28,7 +28,7 @@ var css_file    = "site",
     js_dest     = "assets/build/js",
     //image locations
     image_src   = "assets/images",
-    image_dest  = "assets/bild/images";
+    image_dest  = "assets/build/images";
 //=======swallow error so doesn't stop watch=================================================
 
 var swallowError = function(error){
