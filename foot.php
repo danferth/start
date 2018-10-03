@@ -8,7 +8,7 @@
 <!-- SweetAlert2 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.28.2/sweetalert2.all.js"></script>
 <!-- site.js-->
-<script type="text/javascript" src="assets/build/site.js?ver=<?php echo $v; ?>"></script>
+<script type="text/javascript" src="assets/build/js/site.js?ver=<?php echo $v; ?>"></script>
 
     </body>
 </html>

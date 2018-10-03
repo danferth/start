@@ -33,7 +33,7 @@ if($production){ $v = "3.1.2"; }else{ $v = rand(); } ?>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.28.2/sweetalert2.min.css" />
         <!-- You know what would be cool? some google font action! -->
         <!-- Well..... we're waiting on the fonts bruh -->
-        <link rel="stylesheet" href="/assets/build/site.css?ver=<?php echo $v; ?>">
+        <link rel="stylesheet" href="/assets/build/css/site.css?ver=<?php echo $v; ?>">
 
     </head>
-    <body>
+    <body class="no-js">

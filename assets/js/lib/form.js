@@ -1,7 +1,3 @@
-//AAA should be loaded first when concatinating.
-
-//removes class 'no-js' from body so you know js is enabled.  Do what you want with this
-document.querySelector('body').classList.remove('no-js');
 if($('body').hasClass('hasForm')){
   console.log("ladies and gentalmen, we have a form on the table");
   var form_success    = "<?php echo $form_success; ?>";
@@ -32,4 +28,3 @@ if($('body').hasClass('hasForm')){
 
   onload=function(){document.forms["contactform"].reset()};
 }
-//go nuts!

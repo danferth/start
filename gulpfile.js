@@ -57,7 +57,7 @@ gulp.task('help', function(){
 //=======stylesheet===========================================================================
 //sourcemaps | sass | prefix | minimize | filesize
 gulp.task('css',function(){
-  var processors = [autoprefixer({browsers:['last 2 version']}),csswring];
+  var processors = [autoprefixer({browsers:['last 2 versions', 'ie >= 9', 'android >= 4.4', 'ios >= 7']}),csswring];
   return gulp.src(css_src + '/' +css_file + '.scss')
   .pipe(sasslint())
   .pipe(sasslint.format())
@@ -76,12 +76,12 @@ gulp.task('css',function(){
 gulp.task('js', function(){
   return gulp.src([js_src + '/lib/*.js', js_src + '/site.js'])
   .pipe(concat(js_file + '.js'))
-  .pipe(filesize())
-  .pipe(sourcemaps.init())
-  .pipe(uglify())
-  .pipe(sourcemaps.write())
   .pipe(jshint())
   .pipe(jshint.reporter('jshint-stylish'))
+  .pipe(filesize())
+  //.pipe(sourcemaps.init())
+  //.pipe(uglify())
+  //.pipe(sourcemaps.write())
   .pipe(gulp.dest(js_dest))
   .pipe(filesize());
 });
