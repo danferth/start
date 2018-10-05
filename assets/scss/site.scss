@@ -1,3 +1,8 @@
+//import foundation files
+@import 'lib/foundation/foundation';
+@include foundation-everything;
+
+
 //  create files in lib/ and import them here.
 //    alread created are
 //    - nav for navigation styles
@@ -9,8 +14,6 @@
 
 //imports
 @import 'lib/variables';
-@import 'lib/foundation';
-@import 'lib/sweetalert2';
 @import 'lib/type';
 @import 'lib/nav';
 @import 'lib/general';
