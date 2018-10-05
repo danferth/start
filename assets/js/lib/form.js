@@ -1,5 +1,7 @@
+//these are used if there is a form on the page. If you do not want sweetalert to handle
+//feedback from form entry wipe this and write your own and don't forget to alter 
+//the forms/submit.php to accommodate your own whatever you do.
 if($('body').hasClass('hasForm')){
-  console.log("ladies and gentalmen, we have a form on the table");
   var form_success    = "<?php echo $form_success; ?>";
   var success_message = "<?php echo $success_message; ?>";
   var error_message   = "<?php echo $error_message; ?>";
@@ -25,6 +27,7 @@ if($('body').hasClass('hasForm')){
   		confirmButtonText: 'OK'
   });
   }
-
+  //resets form on load. if you are using forms you may want to set up some sort of variable here for the target ID
+  //maybe something in the confif.php file for the pages that contain forms
   onload=function(){document.forms["contactform"].reset()};
 }

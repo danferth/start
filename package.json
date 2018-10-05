@@ -1,9 +1,9 @@
 {
-  "name": "gulp-starter",
+  "name": "gulp",
   "version": "3.1.0",
-  "description": "gulp file for scss and js, you can take it from there.",
+  "description": "started as a gulp defalt and grew into this monstrosity of a framework",
   "license": "MIT",
-  "repository": "danferth/gulp-starter",
+  "repository": "danferth/gulp",
   "author": {
     "name": "Dan Klotz",
     "email": "danferth@gmail.com",

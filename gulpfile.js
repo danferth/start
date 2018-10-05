@@ -45,12 +45,11 @@ gulp.task('default',['watch']);
 gulp.task('help', function(){
   console.log("=============================================================".bold.green);
   console.log("css                = sourcemaps | sass | prefix | minimize | filesize".cyan);
-  console.log("js                 = concat | jshint | filesize".yellow);
-  console.log("js --production    = concat | sourcemaps | minimize | filesize".yellow);
+  console.log("checkjs            = jslint | filesize (only site.js)".yellow);
+  console.log("js                 = concat | uglify | filesize".yellow);
   console.log("image              = optimize images and save to build dir".magenta);
-  console.log("watch (default)    = css && js".bold.green);
-  console.log("build              = css, js --production & image".grey);
-  console.log("build --production = css, js --production & image".inverse);
+  console.log("watch (default)    = css, checkjs, js".bold.green);
+  console.log("build              = css, js, & image".grey);
   console.log("=============================================================".bold.yellow);
 });
 
@@ -70,18 +69,26 @@ gulp.task('css',function(){
   .pipe(filesize());
 });
 
-//=======javascript===========================================================================
+//=======javascript check===========================================================================
 //concat | jshint | filesize
+//(--production) concat | sourcemaps | minimize | filesize
+gulp.task('checkjs', function(){
+  return gulp.src([js_src + '/site.js'])
+  .pipe(jshint())
+  .pipe(jshint.reporter('jshint-stylish'))
+  .pipe(filesize());
+});
+
+//=======javascript===========================================================================
+//concat | uglify | filesize
 //(--production) concat | sourcemaps | minimize | filesize
 gulp.task('js', function(){
   return gulp.src([js_src + '/lib/*.js', js_src + '/site.js'])
   .pipe(concat(js_file + '.js'))
-  .pipe(jshint())
-  .pipe(jshint.reporter('jshint-stylish'))
-  .pipe(filesize())
-  //.pipe(sourcemaps.init())
-  //.pipe(uglify())
-  //.pipe(sourcemaps.write())
+  .pipe(sourcemaps.init())
+  .pipe(uglify())
+  .on('error', swallowError)
+  .pipe(sourcemaps.write())
   .pipe(gulp.dest(js_dest))
   .pipe(filesize());
 });
@@ -101,6 +108,7 @@ gulp.task('image', function(){
 //=======watch================================================================================
 gulp.task('watch',function(){
   gulp.watch(css_src + '/**/**', ['css']);
+  gulp.watch(js_src + js_file + '.js', ['jscheck']);
   gulp.watch(js_src + '/**/**', ['js']);
 });
 

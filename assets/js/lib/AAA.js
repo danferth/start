@@ -1,4 +1,4 @@
 //AAA should be loaded first when concatinating.
 
-//removes class 'no-js' from body so you know js is enabled.  Do what you want with this
+//removes class 'no-js' from body so you know js is enabled.  Do what you want with this information
 document.querySelector('body').classList.remove('no-js');

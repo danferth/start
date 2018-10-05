@@ -1,4 +1,21 @@
+//  create files in lib/ and import them here.
+//    alread created are
+//    - nav for navigation styles
+//    - type for general type
+//    - general for all other styles
+//    
+//    feel free to create your own and import in your desiered order here
+
+
+//imports
 @import 'lib/variables';
+@import 'lib/foundation';
+@import 'lib/sweetalert2';
+@import 'lib/type';
+@import 'lib/nav';
+@import 'lib/general';
+
+
 
 
 

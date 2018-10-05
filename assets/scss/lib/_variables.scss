@@ -1,7 +1,7 @@
 //color=======================================
 $base-color: hsla(200, 3%, 67%, 1);
-$main-color: hsla(43, 78%, 53%, 1);
-$accent-color: hsla(6, 100%, 50%, 1);
+$main-color: hsl(248, 19%, 24%);
+$accent-color: hsl(42, 37%, 72%);
 
 $white       : scale-color($base-color, $lightness: 100%);
 $white-1     : scale-color($base-color, $lightness: 99%);
@@ -32,6 +32,7 @@ $c-accent-3  : scale-color($accent-color, $lightness: -40%);
 $c-accent-4  : scale-color($accent-color, $lightness: -60%);
 
 //Fonts============================================
+//get some google font goodness and change these
 $body-font: sans-serif;
 $heading-font: serif;
 
