@@ -36,21 +36,18 @@ var swallowError = function(error){
   this.emit('end');
 };
 
-
-
-//=======default task=========================================================================
-gulp.task('default',['watch']);
-
 //=======help=================================================================================
 gulp.task('help', function(){
-  console.log("=============================================================".bold.green);
+  console.log("**********************************************************************************************".bold.white.bgYellow);
   console.log("css                = sourcemaps | sass | prefix | minimize | filesize".cyan);
   console.log("checkjs            = jslint | filesize (only site.js)".yellow);
   console.log("js                 = concat | uglify | filesize".yellow);
   console.log("image              = optimize images and save to build dir".magenta);
+  console.log("----------------------------------------------------------------------------------------------".america);
   console.log("watch (default)    = css, checkjs, js".bold.green);
-  console.log("build              = css, js, & image".grey);
-  console.log("=============================================================".bold.yellow);
+  console.log("build              = css, js, & image".bold.green);
+  console.log("package            = assets/build/**/** + all *.txt & *.php files in root copied to  package".bold.blue);
+  console.log("**********************************************************************************************".bold.white.bgYellow);
 });
 
 //=======stylesheet===========================================================================
@@ -115,3 +112,15 @@ gulp.task('watch',function(){
 //=======BUILD================================================================================
 //pass argument --production i.e. $ gulp build --production
 gulp.task('build',['css', 'js', 'image']);
+
+//=======PACKAGE==============================================================================
+
+gulp.task('package', function(){
+  return gulp.src(['assets/build/**/**',
+                   '*.php',
+                   '*.txt'])
+  .pipe(gulp.dest('package/assets/build'))
+});
+
+//=======default task=========================================================================
+gulp.task('default',['watch']);
