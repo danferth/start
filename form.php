@@ -1,22 +1,9 @@
 <?php
-session_start();
-if(isset($_SESSION['formLoadTime'])){
-  unset($_SESSION['formLoadTime']);
-  $_SESSION['formLoadTime'] = time();
-}else{
-  $_SESSION['formLoadTime'] = time();
-};
-//grab the get from parse file
-$first_name = $_GET['first_name'];
-//grab get and custom fields
-if(isset($_GET['success'])){
-	$form_success = $_GET['success'];
-}
-$rand_str1 = substr(md5(rand()), 0, 7);
-$rand_str2 = substr(md5(rand()), 0, 7);
-
-
-include $_SERVER['DOCUMENT_ROOT'].'/head.php';
+  //set title and description for page
+  $title        = 'has form';
+  $description  = 'description for page';
+  $hasForm = true;
+  include $_SERVER['DOCUMENT_ROOT'].'/head.php';
 ?>
 
 <div class="page-wrap">

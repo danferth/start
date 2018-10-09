@@ -1,6 +1,56 @@
+//********************************************
+//********************************************
+//site variables
+//********************************************
+//********************************************
+
+
+//color=======================================
+$base-color      : hsla(200, 3%, 67%, 1);
+$primary-color   : #35435a;
+$secondary-color : #ceb390;
+$success-color   : #726a4e;
+$warning-color   : #d5ae3f;
+$alert-color     : #c3322c;
+
+$c-white       : scale-color($base-color, $lightness: 100%);
+$c-white-1     : scale-color($base-color, $lightness: 99%);
+$c-white-2     : scale-color($base-color, $lightness: 95%);
+$c-white-3     : scale-color($base-color, $lightness: 85%);
+$c-white-4     : scale-color($base-color, $lightness: 70%);
+$c-white-5     : scale-color($base-color, $lightness: 39%);
+$c-grey        : scale-color($base-color, $lightness: 0%);
+$c-black-1     : scale-color($base-color, $lightness: -15%);
+$c-black-2     : scale-color($base-color, $lightness: -30%);
+$c-black-3     : scale-color($base-color, $lightness: -57%);
+$c-black-4     : scale-color($base-color, $lightness: -70%);
+$c-black-5     : scale-color($base-color, $lightness: -85%);
+$c-black       : scale-color($base-color, $lightness: -100%);
+//================MAIN COLOR===================
+$c-primary-1    : scale-color($primary-color, $lightness: 90%);
+$c-primary-2    : scale-color($primary-color, $lightness: 70%);
+$c-primary-3    : scale-color($primary-color, $lightness: 39%);
+$c-primary      : scale-color($primary-color, $lightness: 0%);
+$c-primary-4    : scale-color($primary-color, $lightness: -20%);
+$c-primary-5    : scale-color($primary-color, $lightness: -40%);
+$c-primary-6    : scale-color($primary-color, $lightness: -60%);
+//==================secondary=====================
+$c-secondary-1  : scale-color($secondary-color, $lightness: 75%);
+$c-secondary-2  : scale-color($secondary-color, $lightness: 45%);
+$c-secondary    : scale-color($secondary-color, $lightness: 0%);
+$c-secondary-3  : scale-color($secondary-color, $lightness: -40%);
+$c-secondary-4  : scale-color($secondary-color, $lightness: -60%);
+
+
+//********************************************
+//********************************************
+//********************************************
+//  -----------------------------------------
 //  Foundation for Sites Settings
-//  -----------------------------
-//
+//  -----------------------------------------
+//********************************************
+//********************************************
+//********************************************
 //  Table of Contents:
 //
 //   1. Global
@@ -69,17 +119,17 @@ $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #1779ba,
-  secondary: #767676,
-  success: #3adb76,
-  warning: #ffae00,
-  alert: #cc4b37,
+  primary: $primary-color,
+  secondary: $secondary-color,
+  success: $success-color,
+  warning: $warning-color,
+  alert: $alert-color,
 );
-$light-gray: #e6e6e6;
-$medium-gray: #cacaca;
-$dark-gray: #8a8a8a;
-$black: #0a0a0a;
-$white: #fefefe;
+$light-gray: $c-white-3;
+$medium-gray: $c-grey;
+$dark-gray: $c-black-4;
+$black: $c-black;
+$white: $c-white;
 $body-background: $white;
 $body-font-color: $black;
 $body-font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;

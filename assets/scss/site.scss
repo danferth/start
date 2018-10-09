@@ -1,7 +1,7 @@
 //import foundation files
 @import 'lib/foundation/foundation';
 @include foundation-everything;
-
+//import font awesome
 @import 'lib/fontawesome/font-awesome';
 
 //  create files in lib/ and import them here.
@@ -9,9 +9,6 @@
 //    - nav for navigation styles
 //    - type for general type
 //    - general for all other styles
-//    
-//    feel free to create your own and import in your desiered order here
-
 
 //imports
 @import 'lib/variables';

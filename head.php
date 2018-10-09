@@ -1,8 +1,38 @@
 <?php
-session_start();
+//start a session if one isn't started
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+//grab the config file (functions file is required within)
 require('config.php');
-$production = false;
-if($production){ $v = "3.1.2"; }else{ $v = rand(); } ?>
+
+//*************************************
+//START form stuffs
+
+//set $hasForm to true before
+//"include $_SERVER['DOCUMENT_ROOT'].'/head.php';"
+//on any page that contains a form
+if($hasForm){
+  if(isset($_SESSION['formLoadTime'])){
+    unset($_SESSION['formLoadTime']);
+    $_SESSION['formLoadTime'] = time();
+  }else{
+    $_SESSION['formLoadTime'] = time();
+  };
+  //grab the get from parse file
+  $first_name = $_GET['first_name'];
+  //grab get and custom fields
+  if(isset($_GET['success'])){
+  	$form_success = $_GET['success'];
+  }
+  $rand_str1 = substr(md5(rand()), 0, 7);
+  $rand_str2 = substr(md5(rand()), 0, 7);
+}
+//END form stuffs
+//*************************************
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>

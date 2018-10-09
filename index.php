@@ -1,4 +1,9 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/head.php'; ?>
+<?php
+//set title and description for page
+$title        = 'home';
+$description  = 'description for page';
+include $_SERVER['DOCUMENT_ROOT'].'/head.php';
+?>
 
 <div class="page-wrap grid-x">
   <div class="cell small-12">

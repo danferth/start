@@ -1,6 +1,8 @@
 <?php
 //this up top
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 require_once("functions.php");
 require_once('phpmailer/PHPMailer.php');
 $server_dir = $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['PHP_SELF']), '/\\') . '/';
