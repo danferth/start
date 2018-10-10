@@ -2,7 +2,7 @@
 //set title and description for page
 $title        = 'home';
 $description  = 'description for page';
-include $_SERVER['DOCUMENT_ROOT'].'/head.php';
+include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
 ?>
 
 <div class="page-wrap grid-x">
@@ -12,4 +12,4 @@ include $_SERVER['DOCUMENT_ROOT'].'/head.php';
   </div>
 </div>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/foot.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/foot.php'; ?>

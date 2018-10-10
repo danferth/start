@@ -20,14 +20,14 @@ var Promise         = require('es6-promise').Promise,
     createFile      = require('create-file');
 //=======options==============================================================================
 var css_file    = "site",
-    css_src     = "assets/scss",
+    css_src     = "assets/dev/scss",
     css_dest    = "assets/build/css",
     //js locations
     js_file     = "site",
-    js_src      = "assets/js",
+    js_src      = "assets/dev/js",
     js_dest     = "assets/build/js",
     //image locations
-    image_src   = "assets/images",
+    image_src   = "assets/dev/images",
     image_dest  = "assets/build/images";
 //=======swallow error so doesn't stop watch=================================================
 
@@ -46,7 +46,7 @@ gulp.task('help', function(){
   console.log("----------------------------------------------------------------------------------------------".america);
   console.log("watch (default)    = css, checkjs, js".bold.green);
   console.log("build              = css, js, & image".bold.green);
-  console.log("package            = assets/build/**/** + all *.txt & *.php files in root copied to  package".bold.blue);
+  console.log("package            = assets/build/**/** + all *.txt & *.php files in root copied to package/".bold.blue);
   console.log("**********************************************************************************************".bold.white.bgYellow);
 });
 
@@ -66,7 +66,7 @@ gulp.task('css',function(){
   .pipe(filesize());
 });
 
-//=======javascript check===========================================================================
+//=======javascript check=====================================================================
 //concat | jshint | filesize
 //(--production) concat | sourcemaps | minimize | filesize
 gulp.task('checkjs', function(){
@@ -115,12 +115,27 @@ gulp.task('build',['css', 'js', 'image']);
 
 //=======PACKAGE==============================================================================
 
-gulp.task('package', function(){
-  return gulp.src(['assets/build/**/**',
-                   '*.php',
-                   '*.txt'])
+gulp.task('packageDEV', function(){
+  return gulp.src(['assets/build/**/**'])
   .pipe(gulp.dest('package/assets/build'))
 });
+
+gulp.task('packageFAVICONS', function(){
+  return gulp.src(['assets/favicons/**/**'])
+  .pipe(gulp.dest('package/assets/favicons'))
+});
+
+gulp.task('packageFORMS', function(){
+  return gulp.src(['assets/forms/**/**'])
+  .pipe(gulp.dest('package/assets/forms'))
+});
+
+gulp.task('packageFILES', function(){
+  return gulp.src(['*.php', '*.txt'])
+  .pipe(gulp.dest('package'))
+});
+
+gulp.task('package', ['packageDEV', 'packageFAVICONS', 'packageFORMS', 'packageFILES']);
 
 //=======default task=========================================================================
 gulp.task('default',['watch']);

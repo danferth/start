@@ -3,7 +3,7 @@
   $title        = 'has form';
   $description  = 'description for page';
   $hasForm = true;
-  include $_SERVER['DOCUMENT_ROOT'].'/head.php';
+  include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
 ?>
 
 <div class="page-wrap">
@@ -21,4 +21,4 @@
 <script type="text/javascript">
   document.body.className += " "+"hasForm";
 </script>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/foot.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/foot.php'; ?>
