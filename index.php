@@ -2,6 +2,7 @@
 //set title and description for page
 $title        = 'home';
 $description  = 'description for page';
+$pageLoader   = false;
 include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
 ?>
 

@@ -6,12 +6,24 @@ $(document).foundation();
 
 //doc ready
 $(document).ready(function(){
-    console.log("doc ready: " + Date());
+
 }); //END Doc.ready
 
 
 //doc load
 $(window).on('load', function(){
-    console.log("doc loaded: " + Date());
+
+  
+  //if loader play()
+  var loaded = function(){
+    if($('.loader').is(':visible')){
+      console.log('loader detected <br/>');
+      //loader animation  
+      var loaderExit = new TimelineMax({onComplete: function(){console.log('loader removerd <br/>')}});
+          loaderExit.add(TweenMax.to('.loader', .5, {autoAlpha:0}));
+	  }
+  };
+	
+  loaded();
 }); //END WIN.load
 

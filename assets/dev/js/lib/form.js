@@ -2,9 +2,6 @@
 //feedback from form entry wipe this and write your own and don't forget to alter 
 //the forms/submit.php to accommodate your own whatever you do.
 if($('body').hasClass('hasForm')){
-  var form_success    = "<?php echo $form_success; ?>";
-  var success_message = "<?php echo $success_message; ?>";
-  var error_message   = "<?php echo $error_message; ?>";
   if(form_success == "true"){
   	window.onload = swal({
   		title: 'Success',

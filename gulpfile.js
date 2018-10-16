@@ -46,7 +46,7 @@ gulp.task('help', function(){
   console.log("----------------------------------------------------------------------------------------------".america);
   console.log("watch (default)    = css, checkjs, js".bold.green);
   console.log("build              = css, js, & image".bold.green);
-  console.log("package            = assets/build/**/** + all *.txt & *.php files in root copied to package/".bold.blue);
+  console.log("package            = copies all relavent files to package/ (use build first)".bold.blue);
   console.log("**********************************************************************************************".bold.white.bgYellow);
 });
 

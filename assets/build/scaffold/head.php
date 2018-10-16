@@ -63,6 +63,18 @@ if($hasForm){
         
         <!-- css -->
         <link rel="stylesheet" href="/assets/build/css/site.css?ver=<?php echo $v; ?>">
-
+        <?php
+					if(isset($_GET['success'])){
+						echo ("<script type='text/javascript'> var form_success = '" . $form_success . "'; </script>");
+					}else{
+						echo ("<script type='text/javascript'> var form_success = 'noForm'; </script>");
+					}
+				?>
     </head>
     <body class="no-js">
+    <?php
+    //need loader
+      if($loader){
+        echo "<div class='loader'></div>";
+      }
+    ?>

@@ -2,6 +2,7 @@
   //set title and description for page
   $title        = 'has form';
   $description  = 'description for page';
+  $pageLoader   = false;
   $hasForm = true;
   include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
 ?>
