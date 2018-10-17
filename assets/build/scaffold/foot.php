@@ -26,6 +26,10 @@
 		echo "<!-- moment -->";
 		echo '<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>';
 	}
+	if($localforage){
+		echo "<!-- localforage -->";
+		echo '<script src="https://cdn.jsdelivr.net/npm/localforage@1.7.2/dist/localforage.min.js" integrity="sha256-vxBB/kklMCqUCIdrghNX+n8Y5rQtVIWSqaiVBSUBI64=" crossorigin="anonymous"></script>';
+	}
 ?>
 
 

@@ -17,6 +17,7 @@ $gsap           = true;
 $sweetalert     = true;
 $hammer         = true;
 $moment         = true;
+$localforage    = true;
 
 //google stuff
 $googleAnalytics = "";
