@@ -104,7 +104,7 @@ gulp.task('image', function(){
 
 //=======delete files in buld css & js========================================================
 gulp.task('clear', function(){
-  del(['assets/build/css/*.css', 'assets/build/js/*']).then(paths => {
+  del(['assets/build/css/*.css', 'assets/build/js/*', 'assets/build/images/*']).then(paths => {
     console.log('Deleted the following files:\n',paths.join('\n'));
     console.log('run gulp build to regenerate'.yellow);
   });
