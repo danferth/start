@@ -15,8 +15,16 @@ Just a basic boilerplate to start a website.
 - I set up the head and foot in `PHP`
 - so many pages on the easy
 - `SCSS` variables are made for color and font
+- the Foundation `scss` is baked in the workflow
 - added `GSAP` and `FontAwesome` just cause their awesome
 - and `swal2`, I ain't reinventing the wheel for a popup
+- also has `localforage`, `hammer`, & `moment`
+- all js 3rd parties can be turned on or off through `config.php`
+- oh and it has a `pageloader` if our into that sort of thing
+- easy versioning of `css` & `js` files
+- ah and maintenance mode
+- use all of it or turn off everything
+- and yeah this is starting to get out of hand lol
 
 You can use this if you want, I use Cloud9 for an IDE:
 
