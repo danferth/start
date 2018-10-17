@@ -18,9 +18,10 @@ $sweetalert     = true;
 $hammer         = true;
 $moment         = true;
 
-//google Analytics
+//google stuff
 $googleAnalytics = "";
-
+$gmailUser       = "user@gmail.com";
+$gmailPass       = "passW0rd";
 
 //global loader
 $globalLoader   = false;

@@ -3,6 +3,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+require_once('../../config.php');
 require_once("functions.php");
 require_once('phpmailer/PHPMailer.php');
 $server_dir = $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['PHP_SELF']), '/\\') . '/';
@@ -69,8 +70,8 @@ if($mail_method == true){
   //**********************
   //need to fill these out
   //**********************
-  $mail->Username = $gmail_email;
-  $mail->Password = $my_password;
+  $mail->Username = $gmailUser;
+  $mail->Password = $gmailpass;
 }
 $mail->setFrom($email, $page);
 $mail->addReplyTo($email, $fname." ".$lname);
