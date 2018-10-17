@@ -15,6 +15,12 @@ $maintenance  = [
 //enable scripts
 $gsap           = true;
 $sweetalert     = true;
+$hammer         = true;
+$moment         = true;
+
+//google Analytics
+$googleAnalytics = "";
+
 
 //global loader
 $globalLoader   = false;
