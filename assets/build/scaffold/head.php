@@ -40,7 +40,8 @@ if($hasForm){
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title><?php echo $title; ?></title>
         <meta name="description" content="<?php echo $description; ?>">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="msapplication-tap-highlight" content="no" />
 
         <!-- ***********FAVICON SETTINGS****************** -->
         <!-- generated with the heros at https://realfavicongenerator.net/ -->

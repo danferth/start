@@ -141,7 +141,7 @@ gulp.task('packageFORMS', function(){
 });
 
 gulp.task('packageFILES', function(){
-  return gulp.src(['*.php', '*.txt'])
+  return gulp.src(['*.php', '*.txt', '*.html'])
   .pipe(gulp.dest('package'))
 });
 
