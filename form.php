@@ -1,10 +1,11 @@
 <?php
+  require('config.php');
   //set title and description for page
   $title        = 'has form';
   $description  = 'description for page';
   $pageLoader   = false;
   $hasForm = true;
-  include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
+  siteHeader();
 ?>
 
 <div class="page-wrap">
@@ -22,4 +23,4 @@
 <script type="text/javascript">
   document.body.className += " "+"hasForm";
 </script>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/foot.php'; ?>
+<?php siteFooter(); ?>

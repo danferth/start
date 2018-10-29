@@ -3,9 +3,6 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-//grab the config file (functions file is required within)
-require('config.php');
-
 //*************************************
 //START form stuffs
 

@@ -36,17 +36,17 @@ You can use this if you want, I use Cloud9 for an IDE:
 You can also use `gulp help` to display all the `tasks` set up in `gulpfile.js`
 
 ```
-*****************************************************************************
+*********************************************************************************
 css                = sourcemaps | sass | prefix | minimize | filesize
 checkjs            = jslint | filesize (only site.js)
 js                 = concat | uglify | filesize
 image              = optimize images and save to build dir
------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 watch (default)    = css, checkjs, js
 clear              = delete css & js from build/
-build              = css, js, & image
+build              = css, js, & image, copies over scaffold and forms folders too
 package            = copies all relavent files to package/ (use build first)
-*****************************************************************************
+*********************************************************************************
 ```
 
 

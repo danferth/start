@@ -3,7 +3,7 @@
 //is the site in production
 $production    = false;
 //if not in production, what is the version for css and js
-$version        = '1.2.3';
+$version        = '1.0.0';
 
 //SERVER & MAINTENANCE settings
 $https          = true;

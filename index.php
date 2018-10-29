@@ -1,9 +1,10 @@
 <?php
-//set title and description for page
-$title        = 'home';
-$description  = 'description for page';
-$pageLoader   = false;
-include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
+  require('config.php');
+  //set title and description for page
+  $title        = 'home';
+  $description  = 'description for page';
+  $pageLoader   = false;
+  siteHeader();
 ?>
 
 <!-- START -->
@@ -15,4 +16,4 @@ include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
 </div>
 <!-- END -->
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/foot.php'; ?>
+<?php siteFooter(); ?>
