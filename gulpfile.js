@@ -104,13 +104,50 @@ gulp.task('image', function(){
 
 //=======delete files in buld css & js========================================================
 gulp.task('clear', function(){
-  del(['assets/build/css/*.css', 'assets/build/js/*', 'assets/build/images/*']).then(paths => {
+  del(['assets/build/**/**']).then(paths => {
     console.log('Deleted the following files:\n',paths.join('\n'));
     console.log('run gulp build to regenerate'.yellow);
   });
 });
 
 
+//=======PACKAGE==============================================================================
+
+//general file moves
+gulp.task('packageFAVICONS', function(){
+  return gulp.src(['assets/dev/favicons/**/**'])
+  .pipe(gulp.dest('assets/build/favicons'))
+});
+
+gulp.task('packageFORMS', function(){
+  return gulp.src(['assets/dev/forms/**/**'])
+  .pipe(gulp.dest('assets/build/forms'))
+});
+
+gulp.task('packageSCAFFOLD', function(){
+  return gulp.src(['assets/dev/scaffold/**/**'])
+  .pipe(gulp.dest('assets/build/scaffold'))
+});
+
+gulp.task('packageFONTS', function(){
+  return gulp.src(['assets/dev/scss/lib/fontawesome/fonts/**/**'])
+  .pipe(gulp.dest('assets/build/css/fonts'))
+});
+
+gulp.task('packageDEV', function(){
+  return gulp.src(['assets/build/**/**'])
+  .pipe(gulp.dest('package/assets/build'))
+});
+
+gulp.task('packageFILES', function(){
+  return gulp.src(['*.php', '*.txt', '*.html'])
+  .pipe(gulp.dest('package'))
+});
+
+gulp.task('package', ['packageDEV', 'packageFILES']);
+
+//=======default task=========================================================================
+gulp.task('default',['watch']);
 
 //=======watch================================================================================
 gulp.task('watch',function(){
@@ -121,31 +158,4 @@ gulp.task('watch',function(){
 
 //=======BUILD================================================================================
 //pass argument --production i.e. $ gulp build --production
-gulp.task('build',['css', 'js', 'image']);
-
-//=======PACKAGE==============================================================================
-
-gulp.task('packageDEV', function(){
-  return gulp.src(['assets/build/**/**'])
-  .pipe(gulp.dest('package/assets/build'))
-});
-
-gulp.task('packageFAVICONS', function(){
-  return gulp.src(['assets/favicons/**/**'])
-  .pipe(gulp.dest('package/assets/favicons'))
-});
-
-gulp.task('packageFORMS', function(){
-  return gulp.src(['assets/forms/**/**'])
-  .pipe(gulp.dest('package/assets/forms'))
-});
-
-gulp.task('packageFILES', function(){
-  return gulp.src(['*.php', '*.txt', '*.html'])
-  .pipe(gulp.dest('package'))
-});
-
-gulp.task('package', ['packageDEV', 'packageFAVICONS', 'packageFORMS', 'packageFILES']);
-
-//=======default task=========================================================================
-gulp.task('default',['watch']);
+gulp.task('build',['css', 'js', 'image', 'packageFAVICONS', 'packageFORMS', 'packageSCAFFOLD', 'packageFONTS']);

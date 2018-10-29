@@ -9,7 +9,7 @@
 
 <div class="page-wrap">
 
-  <form id='contactform' class='first_contact' action='assets/forms/submit.php' method='post'>
+  <form id='contactform' class='first_contact' action='assets/build/forms/submit.php' method='post'>
     <input class='animated fadeIn' id='fname' type='text' name='fname' placeholder='first name' required/>
     <input class='animated fadeIn' id='lname' type='text' name='lname' placeholder='last name' required/>
     <input class='animated fadeIn' id='email' type='email' name='email' placeholder='email' required/>
