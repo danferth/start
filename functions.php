@@ -1,32 +1,31 @@
 <?php
 
 //site root
-if($https){
-    $protocol = 'https://';
+if($GLOBALS['https']){
+    $GLOBALS['protocol'] = 'https://';
 }else{
-    $protocol = 'http://';
+    $GLOBALS['protocol'] = 'http://';
 }
 
-$siteRoot = $protocol . $_SERVER['HTTP_HOST'] . '/';
+$GLOBALS['siteRoot'] = $GLOBALS['protocol'] . $_SERVER['HTTP_HOST'] . '/';
 
-if($maintenance['status']){
-    header('Location: ' . $siteRoot . $maintenance['file']);
+if($GLOBALS['maintenance']['status']){
+    header('Location: ' . $GLOBALS['siteRoot'] . $GLOBALS['maintenance']['file']);
 	exit();
 }
 
 //check if production then set version.
-if($production){ 
-    $v = $version;
+if($GLOBALS['production']){ 
+    $GLOBALS['v'] = $GLOBALS['version'];
     
 }else{
-    $v = rand();
+    $GLOBALS['v'] = rand();
     
 }
 
 //header footer functions
 function siteHeader(){
-    global $production;
-    if($production){
+    if($GLOBALS['production']){
         include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
         echo "production is true";
     }else{
@@ -36,8 +35,7 @@ function siteHeader(){
 };
 
 function siteFooter(){
-    global $production;
-    if($production){
+    if($GLOBALS['production']){
         include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/foot.php';
     }else{
         include $_SERVER['DOCUMENT_ROOT'].'/assets/dev/scaffold/foot.php';
@@ -48,14 +46,14 @@ function siteFooter(){
 
 
 //global loader
-if($globalLoader){
-    $gsap   = true;
-    $loader = true;
+if($GLOBALS['globalLoader']){
+    $GLOBALS['gsap']   = true;
+    $GLOBALS['loader'] = true;
 }
 //page loader
-if($pageLoader){
-    $gsap   = true;
-    $loader = true;
+if($GLOBALS['pageLoader']){
+    $GLOBALS['gsap']   = true;
+    $GLOBALS['loader'] = true;
 }
 
 ?>

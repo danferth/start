@@ -1,31 +1,31 @@
 <?php
 
 //is the site in production
-$production    = false;
+$GLOBALS['production']    = false;
 //if not in production, what is the version for css and js
-$version        = '1.0.0';
+$GLOBALS['version']        = '1.0.0';
 
 //SERVER & MAINTENANCE settings
-$https          = true;
-$maintenance  = [
+$GLOBALS['https']          = true;
+$GLOBALS['maintenance']  = [
                 'status' => false,
                 'file'   => 'maintenance.php'
                 ];
 
 //enable scripts
-$gsap           = true;
-$sweetalert     = true;
-$hammer         = true;
-$moment         = true;
-$localforage    = true;
+$GLOBALS['gsap']           = true;
+$GLOBALS['sweetalert']     = true;
+$GLOBALS['hammer']         = true;
+$GLOBALS['moment']         = true;
+$GLOBALS['localforage']    = true;
 
 //google stuff
-$googleAnalytics = "";
-$gmailUser       = "user@gmail.com";
-$gmailPass       = "passW0rd";
+$GLOBALS['googleAnalytics'] = "";
+$GLOBALS['gmailUser']       = "user@gmail.com";
+$GLOBALS['gmailPass']       = "passW0rd";
 
 //global loader
-$globalLoader   = false;
+$GLOBALS['globalLoader']   = false;
 
 // functions
 require('functions.php');
