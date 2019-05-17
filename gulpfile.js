@@ -120,25 +120,25 @@ exports.build = gulp.parallel(cssTask, jsTask, imageTask);
 
 function packageDEVtask(){
   return gulp.src(['assets/build/**/**'])
-  .pipe(gulp.dest('package/assets/build'))
+  .pipe(gulp.dest('package/assets/build'));
 };
 exports.packageDEV = packageDEVtask;
 
 function packageFAVICONStask(){
   return gulp.src(['assets/favicons/**/**'])
-  .pipe(gulp.dest('package/assets/favicons'))
+  .pipe(gulp.dest('package/assets/favicons'));
 };
 exports.packageFAVICONS = packageFAVICONStask;
 
 function packageFORMStask(){
   return gulp.src(['assets/forms/**/**'])
-  .pipe(gulp.dest('package/assets/forms'))
+  .pipe(gulp.dest('package/assets/forms'));
 };
 exports.packageFORMS = packageFORMStask;
 
 function packageFILEStask(){
   return gulp.src(['*.php', '*.txt'])
-  .pipe(gulp.dest('package'))
+  .pipe(gulp.dest('package'));
 };
 exports.packageFILES = packageFILEStask;
 
