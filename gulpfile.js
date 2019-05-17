@@ -1,7 +1,6 @@
 var Promise         = require('es6-promise').Promise,
     gulp            = require('gulp'),
     colors          = require('colors'),
-    filesize        = require('gulp-filesize'),
     del             = require('del'),
     argv            = require('yargs').argv,
     gulpif          = require('gulp-if'),
@@ -10,7 +9,7 @@ var Promise         = require('es6-promise').Promise,
     sass            = require('gulp-sass'),
     sasslint        = require('gulp-sass-lint'),
     autoprefixer    = require('autoprefixer'),
-    csswring        = require('csswring'),
+    cssnano        = require('cssnano'),
     concat          = require('gulp-concat'),
     uglify          = require('gulp-uglify'),
     jshint          = require('gulp-jshint'),
@@ -29,6 +28,7 @@ var css_file    = "site",
     //image locations
     image_src   = "assets/dev/images",
     image_dest  = "assets/build/images";
+
 //=======swallow error so doesn't stop watch=================================================
 
 var swallowError = function(error){
@@ -37,7 +37,7 @@ var swallowError = function(error){
 };
 
 //=======help=================================================================================
-gulp.task('help', function(){
+function helpTask(cb){
   console.log("**********************************************************************************************".bold.white.bgYellow);
   console.log("css                = sourcemaps | sass | prefix | minimize | filesize".cyan);
   console.log("checkjs            = jslint | filesize (only site.js)".yellow);
@@ -45,16 +45,17 @@ gulp.task('help', function(){
   console.log("image              = optimize images and save to build dir".magenta);
   console.log("----------------------------------------------------------------------------------------------".america);
   console.log("watch (default)    = css, checkjs, js".bold.green);
-  console.log("clear              = delete css & js from build/".bold.green);
-  console.log("build              = css, js, & image, copies over scaffold and forms folders too".bold.green);
-  console.log("package            = copies all relavent files to package/ (use build first)".bold.blue);
+  console.log("build              = css, js, & image".bold.green);
+  console.log("package            = assets/build/**/** + all *.txt & *.php files in root copied to package/".bold.blue);
   console.log("**********************************************************************************************".bold.white.bgYellow);
-});
+  cb();
+};
+exports.help = helpTask;
 
 //=======stylesheet===========================================================================
-//sourcemaps | sass | prefix | minimize | filesize
-gulp.task('css',function(){
-  var processors = [autoprefixer({browsers:['last 2 versions', 'ie >= 9', 'android >= 4.4', 'ios >= 7']}),csswring];
+//sourcemaps | sass | prefix | minimize
+function cssTask(){
+  var processors = [autoprefixer({browsers:['last 2 versions', 'ie >= 9', 'android >= 4.4', 'ios >= 7']}),cssnano];
   return gulp.src(css_src + '/' +css_file + '.scss')
   .pipe(sasslint())
   .pipe(sasslint.format())
@@ -63,36 +64,36 @@ gulp.task('css',function(){
   .on('error', swallowError)
   .pipe(postcss(processors))
   .pipe(sourcemaps.write())
-  .pipe(gulp.dest(css_dest))
-  .pipe(filesize());
-});
+  .pipe(gulp.dest(css_dest));
+};
+exports.css = cssTask;
 
 //=======javascript check=====================================================================
-//concat | jshint | filesize
-//(--production) concat | sourcemaps | minimize | filesize
-gulp.task('checkjs', function(){
+//concat | jshint
+//(--production) concat | sourcemaps | minimize
+function checkjsTask (){
   return gulp.src([js_src + '/site.js'])
   .pipe(jshint())
-  .pipe(jshint.reporter('jshint-stylish'))
-  .pipe(filesize());
-});
+  .pipe(jshint.reporter('jshint-stylish'));
+};
+exports.checkjs = checkjsTask;
 
 //=======javascript===========================================================================
-//concat | uglify | filesize
-//(--production) concat | sourcemaps | minimize | filesize
-gulp.task('js', function(){
+//concat | uglify
+//(--production) concat | sourcemaps | minimize
+function jsTask(){
   return gulp.src([js_src + '/lib/*.js', js_src + '/site.js'])
   .pipe(concat(js_file + '.js'))
   .pipe(sourcemaps.init())
   .pipe(uglify())
   .on('error', swallowError)
   .pipe(sourcemaps.write())
-  .pipe(gulp.dest(js_dest))
-  .pipe(filesize());
-});
+  .pipe(gulp.dest(js_dest));
+};
+exports.js = jsTask;
 
 //=======images===============================================================================
-gulp.task('image', function(){
+function imageTask(){
   return gulp.src(image_src + '/**')
   .pipe(imagemin({
       progressive: true,
@@ -100,62 +101,48 @@ gulp.task('image', function(){
       use: [pngquant()]
   }))
   .pipe(gulp.dest(image_dest));
-});
+};
+exports.image = imageTask;
 
-//=======delete files in buld css & js========================================================
-gulp.task('clear', function(){
-  del(['assets/build/**/**']).then(paths => {
-    console.log('Deleted the following files:\n',paths.join('\n'));
-    console.log('run gulp build to regenerate'.yellow);
-  });
-});
+//=======watch================================================================================
+function watchTask(){
+  gulp.watch(css_src + '/**/**', cssTask);
+  gulp.watch(js_src + js_file + '.js', checkjsTask);
+  gulp.watch(js_src + '/**/**', jsTask);
+};
+exports.watch = watchTask;
 
+//=======BUILD================================================================================
+
+exports.build = gulp.parallel(cssTask, jsTask, imageTask);
 
 //=======PACKAGE==============================================================================
 
-//general file moves
-gulp.task('packageFAVICONS', function(){
-  return gulp.src(['assets/dev/favicons/**/**'])
-  .pipe(gulp.dest('assets/build/favicons'))
-});
-
-gulp.task('packageFORMS', function(){
-  return gulp.src(['assets/dev/forms/**/**'])
-  .pipe(gulp.dest('assets/build/forms'))
-});
-
-gulp.task('packageSCAFFOLD', function(){
-  return gulp.src(['assets/dev/scaffold/**/**'])
-  .pipe(gulp.dest('assets/build/scaffold'))
-});
-
-gulp.task('packageFONTS', function(){
-  return gulp.src(['assets/dev/scss/lib/fontawesome/fonts/**/**'])
-  .pipe(gulp.dest('assets/build/css/fonts'))
-});
-
-gulp.task('packageDEV', function(){
+function packageDEVtask(){
   return gulp.src(['assets/build/**/**'])
   .pipe(gulp.dest('package/assets/build'))
-});
+};
+exports.packageDEV = packageDEVtask;
 
-gulp.task('packageFILES', function(){
-  return gulp.src(['*.php', '*.txt', '*.html'])
+function packageFAVICONStask(){
+  return gulp.src(['assets/favicons/**/**'])
+  .pipe(gulp.dest('package/assets/favicons'))
+};
+exports.packageFAVICONS = packageFAVICONStask;
+
+function packageFORMStask(){
+  return gulp.src(['assets/forms/**/**'])
+  .pipe(gulp.dest('package/assets/forms'))
+};
+exports.packageFORMS = packageFORMStask;
+
+function packageFILEStask(){
+  return gulp.src(['*.php', '*.txt'])
   .pipe(gulp.dest('package'))
-});
+};
+exports.packageFILES = packageFILEStask;
 
-gulp.task('package', ['packageDEV', 'packageFILES']);
+exports.package = gulp.parallel(packageDEVtask, packageFAVICONStask, packageFORMStask, packageFILEStask);
 
-//=======default task=========================================================================
-gulp.task('default',['watch']);
-
-//=======watch================================================================================
-gulp.task('watch',function(){
-  gulp.watch(css_src + '/**/**', ['css']);
-  gulp.watch(js_src + js_file + '.js', ['jscheck']);
-  gulp.watch(js_src + '/**/**', ['js']);
-});
-
-//=======BUILD================================================================================
-//pass argument --production i.e. $ gulp build --production
-gulp.task('build',['css', 'js', 'image', 'packageFAVICONS', 'packageFORMS', 'packageSCAFFOLD', 'packageFONTS']);
+//default Task
+exports.default = watchTask;
