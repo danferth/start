@@ -20,13 +20,13 @@ Just a basic boilerplate to start a website.
 - and `swal2`, I ain't reinventing the wheel for a popup
 - also has `localforage`, `hammer`, & `moment`
 - all js 3rd parties can be turned on or off through `config.php`
-- oh and it has a `pageloader` if our into that sort of thing
+- oh and it has a `pageloader` if you're into that sort of thing
 - easy versioning of `css` & `js` files
 - ah and maintenance mode
 - use all of it or turn off everything
 - and yeah this is starting to get out of hand lol
 
-You can use this if you want, I use Cloud9 for an IDE:
+
 
 - clone this repo into a new project
 - run `npm install`
@@ -43,7 +43,6 @@ js                 = concat | uglify | filesize
 image              = optimize images and save to build dir
 ---------------------------------------------------------------------------------
 watch (default)    = css, checkjs, js
-clear              = delete css & js from build/
 build              = css, js, & image, copies over scaffold and forms folders too
 package            = copies all relavent files to package/ (use build first)
 *********************************************************************************
