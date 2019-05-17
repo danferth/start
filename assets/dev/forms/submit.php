@@ -5,7 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 require_once('../../../config.php');
 require_once("functions.php");
-require_once('phpmailer/PHPMailer.php');
+require_once('PHPMailer/PHPMailerAutoload.php');
 $next_page = 'form.php';
 header('HTTP/1.1 303 See Other');
 //trim post
@@ -32,13 +32,13 @@ checkRequired($required,  $siteRoot, $next_page, $query_string);
 //put any emails that need to be validated into an array
 $checkTheseEmails = array($email);
 checkEmailValid($checkTheseEmails,  $siteRoot, $next_page, $query_string);
-  
+
 //check the honeypots======================================
 //put honeypots into array
 $honeypots = array($honeypotCSS, $honeypotJS);
 checkHoneypot($honeypots,  $siteRoot, $next_page, $query_string);
 //all must be good, lets send a few emails==============================
-$body  = sprintf("<html>"); 
+$body  = sprintf("<html>");
 $body .= sprintf("<body>");
 $body .= sprintf("<h2>Contact from " . $page . " Landing page</h2>\n");
 $body .= sprintf("<hr />");

@@ -47,6 +47,7 @@ function helpTask(cb){
   console.log("watch (default)    = css, checkjs, js".bold.green);
   console.log("build              = css, js, & image".bold.green);
   console.log("package            = assets/build/**/** + all *.txt & *.php files in root copied to package/".bold.blue);
+  console.log("zip                = zip package $ zip -r example.zip original_folder. After apt install zip".bold.white);
   console.log("**********************************************************************************************".bold.white.bgYellow);
   cb();
 };
