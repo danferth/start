@@ -70,29 +70,33 @@ function cssTask(){
 };
 exports.css = cssTask;
 
-//=======javascript check=====================================================================
-//concat | jshint
-//(--production) concat | sourcemaps | minimize
+//=======javascript===========================================================================
+//concat
+function jsCatTask(){
+  return gulp.src([js_src + '/lib/**/*.js', js_src + '/' + js_file + '.js'])
+  .pipe(concat(js_file + '.js'))
+  .pipe(gulp.dest(js_dest));
+};
+exports.jsCat = jsCatTask;
+
+//jshint
 function checkjsTask (){
-  return gulp.src([js_src + '/site.js'])
+  return gulp.src([js_dest + '/' + js_file + '.js'])
   .pipe(jshint())
+  .on('error', swallowError)
   .pipe(jshint.reporter('jshint-stylish'));
 };
 exports.checkjs = checkjsTask;
 
-//=======javascript===========================================================================
-//concat | uglify
-//(--production) concat | sourcemaps | minimize
-function jsTask(){
-  return gulp.src([js_src + '/lib/*.js', js_src + '/site.js'])
-  .pipe(concat(js_file + '.js'))
+//uglify
+function jsUglyTask(){
+  return gulp.src(js_dest + '/' + js_file + '.js')
   .pipe(sourcemaps.init())
   .pipe(uglify())
-  .on('error', swallowError)
   .pipe(sourcemaps.write())
   .pipe(gulp.dest(js_dest));
 };
-exports.js = jsTask;
+exports.jsUgly = jsUglyTask;
 
 //=======images===============================================================================
 function imageTask(){
@@ -108,9 +112,8 @@ exports.image = imageTask;
 
 //=======watch================================================================================
 function watchTask(){
-  gulp.watch(css_src + '/**/**', cssTask);
-  gulp.watch(js_src + js_file + '.js', checkjsTask);
-  gulp.watch(js_src + '/**/**', jsTask);
+  gulp.watch(css_src + '/**/*.scss', cssTask);
+  gulp.watch(js_src + '/**/*.js', gulp.series(checkjsTask, jsCatTask));
 };
 exports.watch = watchTask;
 
@@ -142,7 +145,7 @@ exports.moveScaffold = moveScaffoldTask;
 
 //=======BUILD================================================================================
 exports.build = gulp.series(
-                  gulp.parallel(cssTask, jsTask, imageTask),
+                  gulp.parallel(cssTask, imageTask, gulp.series(jsCatTask, jsUglyTask)),
                   gulp.parallel(moveFontsTask,moveFAVICONStask,moveFORMStask,moveScaffoldTask)
                 );
 //=======PACKAGE==============================================================================
@@ -170,7 +173,7 @@ function packageFilesTask(){
     '!**/.sass-lint.yml',
     '!**/gulpfile.js',
     '!**/package.json',
-    '!**/README.md/**',
+    '!**/README.md',
   ],{dot:true})
   .pipe(gulp.dest('package/'));
 };
@@ -179,7 +182,6 @@ exports.package = gulp.series(packageFilesTask, zipTask, cleanPackageTask);
 function cleanTask(cb){
   del('assets/build');
   del('package/**');
-  del('package.zip');
   cb();
 };
 exports.clean = cleanTask;
