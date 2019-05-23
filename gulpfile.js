@@ -137,6 +137,12 @@ function moveFORMStask(){
 };
 exports.moveFORMS = moveFORMStask;
 
+function moveDBtask(){
+  return gulp.src(['assets/dev/db/**/**'])
+  .pipe(gulp.dest('assets/build/db'));
+};
+exports.moveDB = moveDBtask;
+
 function moveScaffoldTask(){
   return gulp.src(['assets/dev/scaffold/**/**'])
   .pipe(gulp.dest('assets/build/scaffold'));
@@ -146,7 +152,7 @@ exports.moveScaffold = moveScaffoldTask;
 //=======BUILD================================================================================
 exports.build = gulp.series(
                   gulp.parallel(cssTask, imageTask, gulp.series(jsCatTask, jsUglyTask)),
-                  gulp.parallel(moveFontsTask,moveFAVICONStask,moveFORMStask,moveScaffoldTask)
+                  gulp.parallel(moveFontsTask,moveFAVICONStask,moveFORMStask,moveScaffoldTask,moveDBtask)
                 );
 //=======PACKAGE==============================================================================
 function zipTask(){

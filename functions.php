@@ -15,12 +15,10 @@ if($maintenance['status']){
 }
 
 //check if production then set version.
-if($production){ 
+if($production){
     $v = $version;
-    
 }else{
     $v = rand();
-    
 }
 
 //header footer functions
