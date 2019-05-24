@@ -1,4 +1,4 @@
-<?php 
+<?php
 //check radio for isset and output boolean to post variable
 function checkBox($post){
 				if(isset($_POST[$post])){
@@ -40,7 +40,7 @@ function queryRedirect($page,$message){
 	$next_page = $page.".php";
 	/* The header() function sends a HTTP message The 303 code asks the server to use GET when redirecting to another page */
 	header('HTTP/1.1 303 See Other');
-	header('Location: http://' . $server_dir . $next_page . $query_string);
+	header('Location: https://' . $server_dir . $next_page . $query_string);
 }
 //redirect without query
 function redirect($page){
@@ -49,6 +49,6 @@ function redirect($page){
 	$next_page = $page.".php";
 	/* The header() function sends a HTTP message The 303 code asks the server to use GET when redirecting to another page */
 	header('HTTP/1.1 303 See Other');
-	header('Location: http://' . $server_dir . $next_page);
+	header('Location: https://' . $server_dir . $next_page);
 }
 ?>

@@ -108,5 +108,5 @@ $db = null;
 if(is_null($db)){
 	echo "<p>connection closed...</p>";
 }
-echo "<a href='../../index.php'>go to login</a>";
+echo "<a href='../../../index.php'>go to login</a>";
 ?>
