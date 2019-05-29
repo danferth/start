@@ -1,10 +1,10 @@
 ```
-____________              _____ 
+____________              _____
 __  ___/_  /______ _________  /_
 _____ \_  __/  __ `/_  ___/  __/
 ____/ // /_ / /_/ /_  /   / /_  
 /____/ \__/ \__,_/ /_/    \__/  
------------------------------------------------------------------ 
+-----------------------------------------------------------------
 ```                                
 
 
@@ -22,6 +22,7 @@ Just a basic boilerplate to start a website.
 - all js 3rd parties can be turned on or off through `config.php`
 - oh and it has a `pageloader` if you're into that sort of thing
 - easy versioning of `css` & `js` files
+- Oh and functions for databases using `PDO`
 - ah and maintenance mode
 - use all of it or turn off everything
 - and yeah this is starting to get out of hand lol
@@ -38,14 +39,14 @@ You can also use `gulp help` to display all the `tasks` set up in `gulpfile.js`
 ```
 *********************************************************************************
 css                = sourcemaps | sass | prefix | minimize | filesize
-checkjs            = jslint | filesize (only site.js)
-js                 = concat | uglify | filesize
+jsCat              = concatenate js files
+checkjs            = jslint
+jsUgly             = uglify concatenated js file
 image              = optimize images and save to build dir
 ---------------------------------------------------------------------------------
 watch (default)    = css, checkjs, js
-build              = css, js, & image, copies over scaffold and forms folders too
-package            = copies all relavent files to package/ (use build first)
+build              = css, js, & image, copies over dev to build
+package            = package/package.zip created
+clean              = deletes package and build directories
 *********************************************************************************
 ```
-
-

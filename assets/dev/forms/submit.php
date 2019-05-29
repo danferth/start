@@ -4,7 +4,6 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 require_once('../../../config.php');
-require_once("functions.php");
 require_once('PHPMailer/PHPMailerAutoload.php');
 $next_page = 'form.php';
 header('HTTP/1.1 303 See Other');
