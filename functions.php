@@ -25,21 +25,11 @@ if($production){
 
 //header footer functions
 function siteHeader(){
-    global $production;
-    if($production){
-        include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
-    }else{
-        include $_SERVER['DOCUMENT_ROOT'].'/assets/dev/scaffold/head.php';
-    }
+  include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
 };
 
 function siteFooter(){
-    global $production;
-    if($production){
-        include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/foot.php';
-    }else{
-        include $_SERVER['DOCUMENT_ROOT'].'/assets/dev/scaffold/foot.php';
-    }
+  include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/foot.php';
 };
 
 //global loader

@@ -1,7 +1,8 @@
 //these are used if there is a form on the page. If you do not want sweetalert to handle
-//feedback from form entry wipe this and write your own and don't forget to alter 
+//feedback from form entry wipe this and write your own and don't forget to alter
 //the forms/submit.php to accommodate your own whatever you do.
 if($('body').hasClass('hasForm')){
+  $('#your-name925htj').hide();
   if(form_success == "true"){
   	window.onload = swal({
   		title: 'Success',

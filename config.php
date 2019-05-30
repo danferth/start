@@ -1,8 +1,14 @@
 <?php
+/*
+==========is the site in production?==========
+the main thing is if production is false then all js and css files will
+have a random version number to eliminate any cacheing issues while
+in development.
 
-//is the site in production
+Once production is set to true then
+$version below is used for cacheing css and js files
+*/
 $production    = false;
-//if not in production, what is the version for css and js
 $version        = '1.0.0';
 
 //SERVER & MAINTENANCE settings
