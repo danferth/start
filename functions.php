@@ -28,10 +28,8 @@ function siteHeader(){
     global $production;
     if($production){
         include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
-        echo "production is true";
     }else{
         include $_SERVER['DOCUMENT_ROOT'].'/assets/dev/scaffold/head.php';
-        echo "production is false";
     }
 };
 
@@ -63,10 +61,10 @@ if($pageLoader){
 //fun helper function for debugging from http://net.tutsplus.com/tutorials/tools-and-tips/xdebug-professional-php-debugging/
 
 function dump($value) {
-echo ‘<pre>';
+echo '<pre>';
 var_dump($value);
-echo ‘</pre>';
-}
+echo '</pre>';
+};
 
 
 
