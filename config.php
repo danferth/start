@@ -18,6 +18,9 @@ $maintenance  = [
                 'file'   => 'maintenance.php'
                 ];
 
+//db settings
+$useDB          = false;
+
 //enable scripts
 $gsap           = true;
 $sweetalert     = true;
