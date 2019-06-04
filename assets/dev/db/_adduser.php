@@ -4,6 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 include '_connection.php';
 include '../../../functions.php';
+
 //check if admin
 if($_SESSION['admin'] == 1){
 
@@ -35,7 +36,7 @@ if($_SESSION['admin'] == 1){
 					$q->bindParam(":user", $newUser);
 					$q->bindParam(":pass", $hashedPass);
 					$q->bindParam(":salt", $createdSalt);
-					$q->bindParam(":admin", $admin);
+					$q->bindParam(":admin", $isAdmin);
 					$q->execute();
 
 				if(!$q){
@@ -58,8 +59,4 @@ if($_SESSION['admin'] == 1){
 	session_destroy();
 	redirect('login');
 }
-
-
-
-
  ?>

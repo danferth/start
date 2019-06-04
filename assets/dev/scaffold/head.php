@@ -75,7 +75,7 @@ if(!empty($_GET)){
     if($_GET['e'] === "timeout"){
   		echo "<p class='alert'>Sorry but you have been logged out due to inactivity</p>";
   	}
-    if($_GET['e'] === "userAlreadyExist"){
+    if($_GET['e'] === "userAlreadyExists"){
       echo "<p class='alert'>A user with that username already exist.</p>";
     }
     if($_GET['e'] === "badpass"){

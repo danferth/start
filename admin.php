@@ -22,6 +22,7 @@
       <input type="text" name="username" placeholder="user name" required>
       <input type="text" name="password" placeholder="password" required>
       <input type="text" name="passwordConfirm" placeholder="confirm password" required>
+      <label for="isAdmin">Is user Admin? <input id="isAdmin" type="checkbox" name="isAdmin"></label> 
       <input class="button" type="submit" name="submit" value="Add User">
     </form>
   </div>
