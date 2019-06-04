@@ -23,11 +23,10 @@ if(isset($_POST['submit'])){
 
 	if($hashedTestPass === $result['pass']){
 			$_SESSION['secure'] = $result['salt'];
-			queryRedirect('index',$result['ID']);
+			queryRedirect('index', 'm', $result['ID']);
 		}else{
-			queryRedirect('login','login-error');
+			queryRedirect('login', 'e', 'login-error');
 		}
-
 }
 
  ?>

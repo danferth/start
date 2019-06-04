@@ -23,7 +23,7 @@ if($_SESSION['admin'] == 1){
 			if($result->rowCount()>0){
 				$result->closeCursor();
 				dbClose();
-				queryRedirect('list','userAlreadyExists');
+				queryRedirect('admin','e','userAlreadyExists');
 			}else{
 
 				//start creating user
@@ -43,20 +43,20 @@ if($_SESSION['admin'] == 1){
 					}
 					if($q){
 						$q->closeCursor();
-						queryRedirect('list','newUserSuccess');
+						queryRedirect('admin','m','newUserSuccess');
 					}
 				}
 
 		}else{
-			queryRedirect('list','badpass');
+			queryRedirect('admin','e','badpass');
 		}
 
 	}else{
-		redirect('list');
+		redirect('admin');
 	}
 }else{
 	session_destroy();
-	redirect('index');
+	redirect('login');
 }
 
 

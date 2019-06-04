@@ -6,14 +6,14 @@ if($('body').hasClass('hasForm')){
   if(form_success == "true"){
   	window.onload = swal({
   		title: 'Success',
-  		text: success_message,
+  		text: "success_message to be set in form.js",
   		type: 'success',
   		confirmButtonText: 'Thanks'
   });
   }else if(form_success == "false"){
   	window.onload = swal({
   		title: 'Whoops',
-  		text: error_message,
+  		text: "error_message to be set in form.js",
   		type: 'error',
   		confirmButtonText: 'OK'
   });

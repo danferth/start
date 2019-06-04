@@ -168,15 +168,16 @@ function sessionTimeout(){
 		$sessionLife = time() - $_SESSION['timeout'];
 		if($sessionLife > $timeout){
 			session_destroy();
-			header("Location:" . $siteRoot . "login.php?message=timeout");
+			header("Location:" . $siteRoot . "login.php?e=timeout");
 		}
 	}
 }
 //redirect with query
-function queryRedirect($page,$message){
+function queryRedirect($page, $type, $message){
   global $siteRoot;
 	// Build the query string to be attached to the redirected URL
-	$query_string = '?message=' . $message;
+  //$type should be either m = messages or e = errors
+	$query_string = '?' . $type . '=' . $message;
 	// Redirection domain and phisical dir
 	$next_page = $page . ".php";
 	/* The header() function sends a HTTP message The 303 code asks the server to use GET when redirecting to another page */

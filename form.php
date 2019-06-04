@@ -5,6 +5,7 @@
   $description  = 'description for page';
   $pageLoader   = false;
   $hasForm      = true;
+  $adminOnly    = false;
   include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
 ?>
 

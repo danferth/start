@@ -3,8 +3,6 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-dump($_SESSION);
-//dump($_SESSION);
 //*************************************
 //START form stuffs
 
@@ -42,7 +40,7 @@ if($useDB && $useLogin){
 
       if(!isset($_SESSION['user'])){
   	     $q = $db->prepare("SELECT * FROM users WHERE ID=:id");
-  	     $q->bindParam(":id", $_GET['message']);
+  	     $q->bindParam(":id", $_GET['m']);
   	     $q->execute();
   	     $userResult = $q->fetch(PDO::FETCH_ASSOC);
 
@@ -62,30 +60,50 @@ if($useDB && $useLogin){
 //START $_GET[] mesages
 
 if(!empty($_GET)){
-  if(isset($_GET['message'])){
-  	if($_GET['message'] == "login-error"){
-  		echo "<p class='alert'>Username or Password is Incorrect</p>";
-  	}
-  	if($_GET['message'] == "timeout"){
-  		echo "<p class='alert'>Sorry but you have been logged out due to inactivity</p>";
-  	}
-    if(isset($_GET['first_name'])){
-      $first_name = $_GET['fname'];
-    }
-    if(isset($_GET['success'])){
-      $form_success = $_GET['success'];
+  // 'm' or messages
+  if(isset($_GET['m'])){
+  	if($_GET['m'] === "newUserSuccess"){
+  		echo "<p class='alert'>New user created successfully</p>";
     }
   }
 
+  // 'e' or errors
+  if(isset($_GET['e'])){
+    if($_GET['e'] === "login-error"){
+      echo "<p class='alert'>Username or Password is Incorrect</p>";
+    }
+    if($_GET['e'] === "timeout"){
+  		echo "<p class='alert'>Sorry but you have been logged out due to inactivity</p>";
+  	}
+    if($_GET['e'] === "userAlreadyExist"){
+      echo "<p class='alert'>A user with that username already exist.</p>";
+    }
+    if($_GET['e'] === "badpass"){
+      echo "<p class='alert'>passwords did not match, try again.</p>";
+    }
+  }
 
-  dump($_GET);
-}else{
-  echo "no get :(";
+  //form $_GET[]
+  if(isset($_GET['success'])){
+    $form_success = $_GET['success'];
+    if($form_success === 'true'){
+      $form_message = '<script type="text/javascript"> var form_success = "true"; </script>';
+    }elseif($form_success === 'false') {
+      $form_message = '<script type="text/javascript"> var form_success = "false"; </script>';
+    }
+  }
+}
+//END $_GET[] mesages
+//*************************************
+//START redirects
+
+if($adminOnly){
+  if($_SESSION['admin'] === '0'){
+    redirect('index');
+  }
 }
 
-
-
-//END $_GET[] mesages
+//END redirects
 //*************************************
 ?>
 
@@ -121,13 +139,6 @@ if(!empty($_GET)){
 
         <!-- css -->
         <link rel="stylesheet" href="/assets/build/css/site.css?ver=<?php echo $GLOBALS['v']; ?>">
-        <?php
-					if(isset($_GET['success'])){
-						echo ("<script type='text/javascript'> var form_success = '" . $form_success . "'; </script>");
-					}else{
-						echo ("<script type='text/javascript'> var form_success = 'noForm'; </script>");
-					}
-				?>
     </head>
     <body class="no-js">
     <?php
@@ -135,4 +146,34 @@ if(!empty($_GET)){
       if($GLOBALS['loader']){
         echo "<div class='loader'></div>";
       }
+
+      echo "Session:<br/>";
+      dump($_SESSION);
     ?>
+
+
+    <!-- a rudamentary navigation -->
+    <div class="grid-x allign-center">
+      <div class="cell small-12">
+        <nav>
+          <ul>
+            <li><a href="index.php">home</a></li>
+            <li><a href="form.php">contact</a></li>
+            <li><a href="about.php">about</a></li>
+            <li><a href="login.php">login</a></li>
+            <?php
+              if($_SESSION['admin'] === "1"){
+                echo "<li><a href='admin.php'>admin</a></li>";
+              }else{
+                echo "<li><a href='profile.php'>profile</a></li>";
+              }
+             ?>
+            <li><a href="assets/build/db/_logout.php">logout</a></li>
+
+          </ul>
+        </nav>
+      </div>
+      <div class="cell small-12">
+        <?php echo $welcomeMessage; ?>
+      </div>
+    </div>
