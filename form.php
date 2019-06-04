@@ -4,8 +4,8 @@
   $title        = 'has form';
   $description  = 'description for page';
   $pageLoader   = false;
-  $hasForm = true;
-  siteHeader();
+  $hasForm      = true;
+  include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
 ?>
 
 <div class="page-wrap grid-x align-center align-middle" style="height:100vh;">
@@ -25,6 +25,7 @@
 </div>
 
 <script type="text/javascript">
+  //you have to set hasForm as a class to the body
   document.body.className += " "+"hasForm";
 </script>
-<?php siteFooter(); ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/foot.php'; ?>

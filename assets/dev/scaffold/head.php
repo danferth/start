@@ -3,6 +3,8 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+dump($_SESSION);
+//dump($_SESSION);
 //*************************************
 //START form stuffs
 
@@ -18,12 +20,72 @@ if($hasForm){
   if(empty($_GET)){
     $rand_str1 = substr(md5(rand()), 0, 7);
     $rand_str2 = substr(md5(rand()), 0, 7);
-  }else{
-    $first_name = $_GET['first_name'];
-    $form_success = $_GET['success'];
   }
 }
 //END form stuffs
+//*************************************
+//START login stuffs
+if($useDB && $useLogin){
+  if($title === 'login'){
+    if(isset($_SESSION['user'])){
+  	   redirect('index');
+     }
+
+   }else{
+     if(!isset($_SESSION['secure'])){
+       session_destroy();
+  	   redirect('login');
+     }
+
+      sessionTimeout();
+      $_SESSION['timeout'] = time();
+
+      if(!isset($_SESSION['user'])){
+  	     $q = $db->prepare("SELECT * FROM users WHERE ID=:id");
+  	     $q->bindParam(":id", $_GET['message']);
+  	     $q->execute();
+  	     $userResult = $q->fetch(PDO::FETCH_ASSOC);
+
+  	     $_SESSION['user'] = $userResult['user'];
+  	     $_SESSION['admin'] = $userResult['admin'];
+  	     $q->closeCursor();
+
+  	     $welcomeMessage = "<p class='welcome'>Welcome ". $_SESSION['user']."</p>";
+        }else{
+  	       $welcomeMessage = "<p class='welcome'>Logged in as: ". $_SESSION['user']."</p>";
+        }
+           dbClose();
+      }
+}
+//END login stuffs
+//*************************************
+//START $_GET[] mesages
+
+if(!empty($_GET)){
+  if(isset($_GET['message'])){
+  	if($_GET['message'] == "login-error"){
+  		echo "<p class='alert'>Username or Password is Incorrect</p>";
+  	}
+  	if($_GET['message'] == "timeout"){
+  		echo "<p class='alert'>Sorry but you have been logged out due to inactivity</p>";
+  	}
+    if(isset($_GET['first_name'])){
+      $first_name = $_GET['fname'];
+    }
+    if(isset($_GET['success'])){
+      $form_success = $_GET['success'];
+    }
+  }
+
+
+  dump($_GET);
+}else{
+  echo "no get :(";
+}
+
+
+
+//END $_GET[] mesages
 //*************************************
 ?>
 

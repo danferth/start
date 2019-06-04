@@ -110,13 +110,6 @@ function imageTask(){
 };
 exports.image = imageTask;
 
-//=======watch================================================================================
-function watchTask(){
-  gulp.watch(css_src + '/**/*.scss', cssTask);
-  gulp.watch(js_src + '/**/*.js', gulp.series(checkjsTask, jsCatTask));
-};
-exports.watch = watchTask;
-
 //=======move files around==============================================================================
 
 function moveFontsTask(){
@@ -191,5 +184,14 @@ function cleanTask(cb){
   cb();
 };
 exports.clean = cleanTask;
+//=======watch================================================================================
+function watchTask(){
+  gulp.watch(css_src + '/**/*.scss', cssTask);
+  gulp.watch(js_src + '/**/*.js', gulp.series(checkjsTask, jsCatTask));
+  gulp.watch('assets/dev/forms/**/**', moveFORMStask);
+  gulp.watch('assets/dev/db/**/**', moveDBtask);
+  gulp.watch('assets/dev/scaffold/**/**', moveScaffoldTask);
+};
+exports.watch = watchTask;
 //default Task
 exports.default = watchTask;

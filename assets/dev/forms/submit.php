@@ -16,7 +16,7 @@ $honeypotJS = filter_var($_POST['your-email247htj'], FILTER_SANITIZE_STRING, FIL
 $fname   = filter_var($_POST['fname'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
 $lname   = filter_var($_POST['lname'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
 $email   = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-$query_string = '?first_name=' . $fname;
+$query_string = '?fname=' . $fname;
 //==========================================================
 //Let's check for a few things and then go forward shall we
 //==========================================================

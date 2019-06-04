@@ -10,7 +10,6 @@ if($https){
 }
 
 $siteRoot = $protocol . $_SERVER['HTTP_HOST'] . '/';
-
 if($maintenance['status']){
     header('Location: ' . $siteRoot . $maintenance['file']);
 	exit();
@@ -22,15 +21,6 @@ if($production){
 }else{
     $v = rand();
 }
-
-//header footer functions
-function siteHeader(){
-  include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
-};
-
-function siteFooter(){
-  include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/foot.php';
-};
 
 //global loader
 if($globalLoader){
@@ -48,7 +38,6 @@ if($pageLoader){
 //=============================================================================
 //******************************helper functions******************************
 //=============================================================================
-//fun helper function for debugging from http://net.tutsplus.com/tutorials/tools-and-tips/xdebug-professional-php-debugging/
 
 function dump($value) {
 echo '<pre>';
@@ -148,6 +137,7 @@ function formTimeCheck($formTimeLimit, $siteRoot, $next_page, $query_string){
 //=============================================================================
 //********************************db functions********************************
 //=============================================================================
+
 //check radio for isset and output boolean to post variable
 function checkBox($post){
 				if(isset($_POST[$post])){
@@ -166,38 +156,40 @@ function boxChecked($query,$check,$name){
 		}
 	}
 //close connection to db
-	function dbClose(){
+function dbClose(){
+  global $db;
 	$db = null;
 }
 //session timeout put into form action pages so page does not parse if timeout
 function sessionTimeout(){
-	$timeout = 3600;
+  global $siteRoot;
+	$timeout = 600;
 	if(isset($_SESSION['timeout'])){
 		$sessionLife = time() - $_SESSION['timeout'];
 		if($sessionLife > $timeout){
 			session_destroy();
-			header("Location: index.php?message=timeout");
+			header("Location:" . $siteRoot . "login.php?message=timeout");
 		}
 	}
 }
 //redirect with query
 function queryRedirect($page,$message){
+  global $siteRoot;
 	// Build the query string to be attached to the redirected URL
 	$query_string = '?message=' . $message;
 	// Redirection domain and phisical dir
-	$server_dir = $_SERVER['HTTP_HOST'] . rtrim(dirname('/www/print/asset/'), '/\\') . '/';
-	$next_page = $page.".php";
+	$next_page = $page . ".php";
 	/* The header() function sends a HTTP message The 303 code asks the server to use GET when redirecting to another page */
 	header('HTTP/1.1 303 See Other');
-	header('Location: https://' . $server_dir . $next_page . $query_string);
+	header('Location: ' . $siteRoot . $next_page . $query_string);
 }
 //redirect without query
 function redirect($page){
 	// Redirection domain and phisical dir
-	$server_dir = $_SERVER['HTTP_HOST'] . rtrim(dirname('/www/print/asset/'), '/\\') . '/';
-	$next_page = $page.".php";
+	global $siteRoot;
+	$next_page = $page . ".php";
 	/* The header() function sends a HTTP message The 303 code asks the server to use GET when redirecting to another page */
 	header('HTTP/1.1 303 See Other');
-	header('Location: https://' . $server_dir . $next_page);
+	header('Location: ' . $siteRoot . $next_page);
 }
 ?>

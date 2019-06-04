@@ -2,8 +2,8 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-include "_connection.php";
-require_once "db_functions.php";
+include '_connection.php';
+include '../../../functions.php';
 //check if admin
 if($_SESSION['admin'] == 1){
 

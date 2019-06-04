@@ -5,7 +5,7 @@
   $description  = 'description for page';
   $pageLoader   = false;
   $hasForm      = false;
-  siteHeader();
+  include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
 ?>
 
 <!-- START -->
@@ -14,7 +14,18 @@
     <h1>start</h1>
     <p>This is in a page wrap<i class="fa fa-smile-o"></i></p>
   </div>
+  <?php
+
+    if($useDB && $useLogin){
+      echo '<div class="cell small-12">';
+      echo '<a href="assets/build/db/_logout.php">logout</a>';
+      echo '</div>';
+    }
+
+
+   ?>
+
 </div>
 <!-- END -->
 
-<?php siteFooter(); ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/foot.php'; ?>

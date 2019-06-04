@@ -1,17 +1,18 @@
 <?php
+
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
-include "_connection.php";
-require_once "db_functions.php";
+include '_connection.php';
+include '../../../functions.php';
 
 if(isset($_POST['submit'])){
 
 		$suppliedUser = $_POST['user'];
 		$suppliedPass = $_POST['pass'];
 
-	$q = $db->prepare("SELECT * FROM users WHERE user=:user");
+	  $q = $db->prepare("SELECT * FROM users WHERE user=:user");
 		$q->bindParam(":user",$suppliedUser);
 		$q->execute();
 
@@ -22,11 +23,11 @@ if(isset($_POST['submit'])){
 
 	if($hashedTestPass === $result['pass']){
 			$_SESSION['secure'] = $result['salt'];
-			queryRedirect('list',$result['ID']);
+			queryRedirect('index',$result['ID']);
 		}else{
-
-			queryRedirect('index','error');
+			queryRedirect('login','login-error');
 		}
 
 }
+
  ?>
