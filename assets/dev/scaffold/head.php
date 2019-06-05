@@ -20,7 +20,6 @@ if($hasForm){
     $rand_str2 = substr(md5(rand()), 0, 7);
   }
 }
-//END form stuffs
 //*************************************
 //START login stuffs
 if($useDB && $useLogin){
@@ -48,14 +47,13 @@ if($useDB && $useLogin){
   	     $_SESSION['admin'] = $userResult['admin'];
   	     $q->closeCursor();
 
-  	     $welcomeMessage = "<p class='welcome'>Welcome ". $_SESSION['user']."</p>";
+  	     $welcomeMessage = "Welcome ". $_SESSION['user'];
         }else{
-  	       $welcomeMessage = "<p class='welcome'>Logged in as: ". $_SESSION['user']."</p>";
+  	       $welcomeMessage = "Logged in as: ". $_SESSION['user'];
         }
            dbClose();
       }
 }
-//END login stuffs
 //*************************************
 //START $_GET[] mesages
 
@@ -63,27 +61,27 @@ if(!empty($_GET)){
   // 'm' or messages
   if(isset($_GET['m'])){
   	if($_GET['m'] === "newUserSuccess"){
-  		echo "<p class='alert'>New user created successfully</p>";
+  		$siteMessage = "New user created successfully";
     }
   }
 
   // 'e' or errors
   if(isset($_GET['e'])){
     if($_GET['e'] === "login-error"){
-      echo "<p class='alert'>Username or Password is Incorrect</p>";
+      $siteError = "Username or Password is Incorrect";
     }
     if($_GET['e'] === "timeout"){
-  		echo "<p class='alert'>Sorry but you have been logged out due to inactivity</p>";
+  		$siteError = "Sorry but you have been logged out due to inactivity";
   	}
     if($_GET['e'] === "userAlreadyExists"){
-      echo "<p class='alert'>A user with that username already exist.</p>";
+      $siteError = "A user with that username already exist.";
     }
     if($_GET['e'] === "badpass"){
-      echo "<p class='alert'>passwords did not match, try again.</p>";
+      $siteError = "passwords did not match, try again.";
     }
   }
 
-  //form $_GET[]
+  //form $_GET[] these set variables in javascript for swal2
   if(isset($_GET['success'])){
     $form_success = $_GET['success'];
     if($form_success === 'true'){
@@ -93,17 +91,14 @@ if(!empty($_GET)){
     }
   }
 }
-//END $_GET[] mesages
 //*************************************
-//START redirects
+//START redirects cause, admin only page
 
 if($adminOnly){
   if($_SESSION['admin'] === '0'){
     redirect('index');
   }
 }
-
-//END redirects
 //*************************************
 ?>
 
@@ -146,9 +141,6 @@ if($adminOnly){
       if($GLOBALS['loader']){
         echo "<div class='loader'></div>";
       }
-
-      echo "Session:<br/>";
-      dump($_SESSION);
     ?>
 
 
@@ -156,24 +148,38 @@ if($adminOnly){
     <div class="grid-x allign-center">
       <div class="cell small-12">
         <nav>
-          <ul>
+          <ul class="menu">
             <li><a href="index.php">home</a></li>
             <li><a href="form.php">contact</a></li>
             <li><a href="about.php">about</a></li>
-            <li><a href="login.php">login</a></li>
             <?php
-              if($_SESSION['admin'] === "1"){
-                echo "<li><a href='admin.php'>admin</a></li>";
-              }else{
-                echo "<li><a href='profile.php'>profile</a></li>";
+              if($useDB && $useLogin){
+                if($_SESSION['admin'] === "1"){
+                  echo "<li><a href='admin.php'>admin</a></li>";
+                }elseif($_SESSION['admin'] === '0'){
+                  echo "<li><a href='profile.php'>profile</a></li>";
+                }
+                if($_SESSION['user']){
+                  echo "<li><a href='assets/build/db/_logout.php'>logout</a></li>";
+                  echo "<li class='welcome'><a href='#'>" . $welcomeMessage . "</a></li>";
+                }
               }
              ?>
-            <li><a href="assets/build/db/_logout.php">logout</a></li>
-
           </ul>
         </nav>
       </div>
-      <div class="cell small-12">
-        <?php echo $welcomeMessage; ?>
-      </div>
+      <?php
+        if(isset($siteMessage)){
+          echo "<div class='callout secondary'>";
+          echo "<h5>Message:</h5>";
+          echo "<p>" . $siteMessage . "</p>";
+          echo "</div>";
+        }
+        if(isset($siteError)){
+          echo "<div class='callout alert'>";
+          echo "<h5>Message:</h5>";
+          echo "<p>" . $siteError . "</p>";
+          echo "</div>";
+        }
+       ?>
     </div>

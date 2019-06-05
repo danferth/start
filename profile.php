@@ -14,16 +14,6 @@
     <h1>profile</h1>
     <p>The user profile page<i class="fa fa-smile-o"></i></p>
   </div>
-  <?php
-
-    if($useDB && $useLogin){
-      echo '<div class="cell small-12">';
-      echo '<a href="assets/build/db/_logout.php">logout</a>';
-      echo '</div>';
-    }
-
-
-   ?>
 
 </div>
 <!-- END -->
