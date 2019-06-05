@@ -47,9 +47,9 @@ if($useDB && $useLogin){
   	     $_SESSION['admin'] = $userResult['admin'];
   	     $q->closeCursor();
 
-  	     $welcomeMessage = "Welcome ". $_SESSION['user'];
+  	     $welcomeMessage = "<i>Welcome:</i> ". $_SESSION['user'];
         }else{
-  	       $welcomeMessage = "Logged in as: ". $_SESSION['user'];
+  	       $welcomeMessage = "<i>Logged in as:</i> ". $_SESSION['user'];
         }
            dbClose();
       }
@@ -142,10 +142,11 @@ if($adminOnly){
         echo "<div class='loader'></div>";
       }
     ?>
-
+<!-- this containing <div> ends in foot.php -->
+<div class="grid-container fluid">
 
     <!-- a rudamentary navigation -->
-    <div class="grid-x allign-center">
+    <div class="grid-x">
       <div class="cell small-12">
         <nav>
           <ul class="menu">
@@ -161,7 +162,7 @@ if($adminOnly){
                 }
                 if($_SESSION['user']){
                   echo "<li><a href='assets/build/db/_logout.php'>logout</a></li>";
-                  echo "<li class='welcome'><a href='#'>" . $welcomeMessage . "</a></li>";
+                  echo "<li><span class='welcomeMessage'>" . $welcomeMessage . "</span></li>";
                 }
               }
              ?>
@@ -170,13 +171,19 @@ if($adminOnly){
       </div>
       <?php
         if(isset($siteMessage)){
-          echo "<div class='callout secondary'>";
+          echo "<div class='small-12 callout secondary'  data-closable>";
+          echo "<button class='close-button' aria-label='Close alert' type='button' data-close>";
+          echo "<span aria-hidden='true'>&times;</span>";
+          echo "</button>";
           echo "<h5>Message:</h5>";
           echo "<p>" . $siteMessage . "</p>";
           echo "</div>";
         }
         if(isset($siteError)){
-          echo "<div class='callout alert'>";
+          echo "<div class='small-12 callout alert'  data-closable>";
+          echo "<button class='close-button' aria-label='Close alert' type='button' data-close>";
+          echo "<span aria-hidden='true'>&times;</span>";
+          echo "</button>";
           echo "<h5>Message:</h5>";
           echo "<p>" . $siteError . "</p>";
           echo "</div>";

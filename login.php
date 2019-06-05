@@ -10,7 +10,7 @@
 ?>
 
 <!-- START -->
-<div class="page-wrap grid-x align-center align-middle" style="height:100vh;">
+<div class="page-wrap grid-x align-center align-middle" style="height:90vh;">
   <div class="cell small-12 medium-4">
     <h4>Login Please</h4>
     <form action="assets/build/db/_login.php" method="POST">

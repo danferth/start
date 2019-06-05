@@ -10,23 +10,22 @@
 ?>
 
 <!-- START -->
-<div class="page-wrap grid-x">
+<div class="page-wrap grid-x align-center" style="height:90vh;">
   <div class="cell small-12">
     <h1>Admin</h1>
     <p>Must be admin to see this page<i class="fa fa-smile-o"></i></p>
   </div>
 
-  <div class="cell small-6">
-    <h1>Add a user</h1>
+  <div class="cell small-4">
+    <h3>Add a user</h3>
     <form class="" action="assets/build/db/_adduser.php" method="post">
       <input type="text" name="username" placeholder="user name" required>
       <input type="text" name="password" placeholder="password" required>
       <input type="text" name="passwordConfirm" placeholder="confirm password" required>
-      <label for="isAdmin">Is user Admin? <input id="isAdmin" type="checkbox" name="isAdmin"></label> 
+      <label for="isAdmin">Will user have Admin privileges? <input id="isAdmin" type="checkbox" name="isAdmin"></label>
       <input class="button" type="submit" name="submit" value="Add User">
     </form>
   </div>
-
 
 </div>
 <!-- END -->

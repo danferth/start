@@ -9,7 +9,7 @@
   include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
 ?>
 
-<div class="page-wrap grid-x align-center align-middle" style="height:100vh;">
+<div class="page-wrap grid-x align-center align-middle" style="height:90vh;">
   <div class="cell small-12 medium-6">
     <form id='contactform' class='first_contact' action='assets/build/forms/submit.php' method='post'>
       <input class='animated fadeIn' id='fname' type='text' name='fname' placeholder='first name' required/>

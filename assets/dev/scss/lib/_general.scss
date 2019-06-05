@@ -1,1 +1,8 @@
 // put general site styles here
+.welcomeMessage{
+  //this is only used if you enabled $useLogin in config.PHP
+  color:$primary-color;
+  display:block;
+  padding: .7rem 1rem;
+  line-height:1;
+}

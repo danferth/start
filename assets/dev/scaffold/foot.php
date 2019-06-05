@@ -1,10 +1,17 @@
 <!-- BEGIN FOOTER -->
 
 <div class="footer">
-
+	<div class="grid-x">
+		<div class="cell small-12">
+			<p><i class="fa fa-copyright"></i> <?php echo date(Y); ?> danferth</p>
+		</div>
+	</div>
 </div>
 
 <!-- END FOOTER -->
+
+<!-- END grid-container from head.php -->
+</div>
 
 <!-- jQuery -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

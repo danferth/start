@@ -10,7 +10,7 @@
 ?>
 
 <!-- START -->
-<div class="page-wrap grid-x">
+<div class="page-wrap grid-x" style="height:90vh;">
   <div class="cell small-12">
     <h1>About</h1>
     <p>About this site<i class="fa fa-smile-o"></i></p>
