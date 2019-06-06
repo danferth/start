@@ -13,9 +13,9 @@
 ?>
 
 <!-- START -->
-<div class="page-wrap grid-x">
+<div class="page-wrap grid-x" style="height:90vh;">
   <div class="cell small-12">
-    <h1>profile</h1>
+    <h3>profile</h3>
     <p>The user profile page<i class="fa fa-smile-o"></i></p>
   </div>
 

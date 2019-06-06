@@ -23,25 +23,22 @@ if($hasForm){
 //*************************************
 //START login stuffs
 if($useDB && $useLogin){
-  //if full site is to be locked down unless logged in
   if($fullSiteSecure){
-    if($title === 'login'){
-      if(isset($_SESSION['secure'])){
-    	   redirect('index');
+    if(isset($_SESSION['secure'])){
+      if($title === 'login'){
+        redirect('index');
       }
-    }else{
-       if(!isset($_SESSION['secure'])){
-         session_destroy();
-    	   redirect('login');
-       }
-     }
-  // if $fullSiteSecure set to false then only
-  // restrict pages with $restrictedPage set to true
+    }elseif(!isset($_SESSION['secure'])){
+      if($title !== 'login'){
+        session_destroy();
+        redirect('login');
+      }
+    }
   }elseif(!$fullSiteSecure){
     if($restrictedPage){
       if(!isset($_SESSION['secure'])){
         session_destroy();
-        redirect('login');
+      	redirect('login');
       }
     }
   }
@@ -103,7 +100,7 @@ if($adminOnly){
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title><?php echo $GLOBALS['title']; ?></title>
-        <meta name="description" content="<?php echo $GLOBALS['description']; ?>">
+        <meta name="description" content="<?php echo $description; ?>">
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="msapplication-tap-highlight" content="no" />
 
@@ -127,7 +124,7 @@ if($adminOnly){
         <!-- Well..... we're waiting on the fonts bruh -->
 
         <!-- css -->
-        <link rel="stylesheet" href="/assets/build/css/site.css?ver=<?php echo $GLOBALS['v']; ?>">
+        <link rel="stylesheet" href="/assets/build/css/site.css?ver=<?php echo $v; ?>">
     </head>
     <body class="no-js">
     <?php
@@ -180,7 +177,7 @@ if($adminOnly){
           echo "<button class='close-button' aria-label='Close alert' type='button' data-close>";
           echo "<span aria-hidden='true'>&times;</span>";
           echo "</button>";
-          echo "<h5>Message:</h5>";
+          echo "<h5>Error:</h5>";
           echo "<p>" . $siteError . "</p>";
           echo "</div>";
         }

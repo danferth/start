@@ -15,7 +15,7 @@
 <!-- START -->
 <div class="page-wrap grid-x align-center" style="height:90vh;">
   <div class="cell small-12">
-    <h1>Admin</h1>
+    <h3>Admin</h3>
     <p>Must be admin to see this page<i class="fa fa-smile-o"></i></p>
   </div>
 
