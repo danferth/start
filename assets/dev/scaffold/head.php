@@ -23,27 +23,29 @@ if($hasForm){
 //*************************************
 //START login stuffs
 if($useDB && $useLogin){
-  if($fullSiteSecure){
-    if(isset($_SESSION['secure'])){
-      if($title === 'login'){
-        redirect('index');
-      }
-    }elseif(!isset($_SESSION['secure'])){
+  if(isset($_SESSION['secure'])){
+    sessionTimeout();
+    $_SESSION['timeout'] = time();
+    $welcomeMessage = "<b>" . $_SESSION['user'] . "</b> <i>is logged in!</i>";
+
+    if($title === 'login'){
+      redirect('index');
+    }
+  }elseif(!isset($_SESSION['secure'])){
+    $welcomeMessage = "";
+    if(isset($_SESSION['timeout'])){
+      unset($_SESSION['timeout']);
+    }
+    if($fullSiteSecure){
       if($title !== 'login'){
-        session_destroy();
+        redirect('login');
+      }
+    }elseif(!$fullSiteSecure){
+      if($restrictedPage){
         redirect('login');
       }
     }
-  }elseif(!$fullSiteSecure){
-    if($restrictedPage){
-      if(!isset($_SESSION['secure'])){
-        session_destroy();
-      	redirect('login');
-      }
-    }
   }
-  sessionTimeout();
-  $_SESSION['timeout'] = time();
 }
 //*************************************
 //START $_GET[] mesages
@@ -181,6 +183,7 @@ if($adminOnly){
           echo "<p>" . $siteError . "</p>";
           echo "</div>";
         }
+        dump($_SESSION);
        ?>
 
     </div>
