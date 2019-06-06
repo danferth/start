@@ -31,6 +31,11 @@ if($useDB && $useLogin){
     if($title === 'login'){
       redirect('index');
     }
+    if($adminOnly){
+      if($_SESSION['admin'] === '0'){
+        redirect('index');
+      }
+    }
   }elseif(!isset($_SESSION['secure'])){
     $welcomeMessage = "";
     if(isset($_SESSION['timeout'])){
@@ -87,11 +92,7 @@ if(!empty($_GET)){
 //*************************************
 //START redirects cause, admin only page
 
-if($adminOnly){
-  if($_SESSION['admin'] === '0'){
-    redirect('index');
-  }
-}
+
 //*************************************
 ?>
 
@@ -101,7 +102,7 @@ if($adminOnly){
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title><?php echo $GLOBALS['title']; ?></title>
+        <title><?php echo $title; ?></title>
         <meta name="description" content="<?php echo $description; ?>">
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="msapplication-tap-highlight" content="no" />
@@ -183,7 +184,6 @@ if($adminOnly){
           echo "<p>" . $siteError . "</p>";
           echo "</div>";
         }
-        dump($_SESSION);
        ?>
 
     </div>

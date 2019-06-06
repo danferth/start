@@ -12,7 +12,6 @@ $production    = false;
 $version        = '1.0.0';
 
 //SERVER & MAINTENANCE settings
-$https          = true;
 $maintenance  = [
                 'status' => false,
                 'file'   => 'maintenance.php'
