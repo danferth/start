@@ -23,36 +23,30 @@ if($hasForm){
 //*************************************
 //START login stuffs
 if($useDB && $useLogin){
-  if($title === 'login'){
-    if(isset($_SESSION['user'])){
-  	   redirect('index');
-     }
-
-   }else{
-     if(!isset($_SESSION['secure'])){
-       session_destroy();
-  	   redirect('login');
-     }
-
-      sessionTimeout();
-      $_SESSION['timeout'] = time();
-
-      if(!isset($_SESSION['user'])){
-  	     $q = $db->prepare("SELECT * FROM users WHERE ID=:id");
-  	     $q->bindParam(":id", $_GET['m']);
-  	     $q->execute();
-  	     $userResult = $q->fetch(PDO::FETCH_ASSOC);
-
-  	     $_SESSION['user'] = $userResult['user'];
-  	     $_SESSION['admin'] = $userResult['admin'];
-  	     $q->closeCursor();
-
-  	     $welcomeMessage = "<i>Welcome:</i> ". $_SESSION['user'];
-        }else{
-  	       $welcomeMessage = "<i>Logged in as:</i> ". $_SESSION['user'];
-        }
-           dbClose();
+  //if full site is to be locked down unless logged in
+  if($fullSiteSecure){
+    if($title === 'login'){
+      if(isset($_SESSION['secure'])){
+    	   redirect('index');
       }
+    }else{
+       if(!isset($_SESSION['secure'])){
+         session_destroy();
+    	   redirect('login');
+       }
+     }
+  // if $fullSiteSecure set to false then only
+  // restrict pages with $restrictedPage set to true
+  }elseif(!$fullSiteSecure){
+    if($restrictedPage){
+      if(!isset($_SESSION['secure'])){
+        session_destroy();
+        redirect('login');
+      }
+    }
+  }
+  sessionTimeout();
+  $_SESSION['timeout'] = time();
 }
 //*************************************
 //START $_GET[] mesages
@@ -163,6 +157,8 @@ if($adminOnly){
                 if($_SESSION['user']){
                   echo "<li><a href='assets/build/db/_logout.php'>logout</a></li>";
                   echo "<li><span class='welcomeMessage'>" . $welcomeMessage . "</span></li>";
+                }else{
+                  echo "<li><a href='login.php'>login</a></li>";
                 }
               }
              ?>
@@ -189,4 +185,5 @@ if($adminOnly){
           echo "</div>";
         }
        ?>
+
     </div>

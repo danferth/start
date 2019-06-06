@@ -1,11 +1,14 @@
 <?php
   require('config.php');
   //set title and description for page
-  $title        = 'home';
-  $description  = 'description for page';
-  $pageLoader   = false;
-  $hasForm      = false;
-  $adminOnly    = false;
+  $title          = 'home';
+  $description    = 'description for page';
+  $pageLoader     = false;
+  $hasForm        = false;
+  //for login use only
+  $restrictedPage = false;
+  $adminOnly      = false;
+  
   include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
 ?>
 

@@ -1,6 +1,4 @@
 <?php
-
-
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -22,8 +20,10 @@ if(isset($_POST['submit'])){
 		$hashedTestPass = hash('sha512',$testPass);
 
 	if($hashedTestPass === $result['pass']){
-			$_SESSION['secure'] = $result['salt'];
-			queryRedirect('index', 'm', $result['ID']);
+			$_SESSION['secure']  = $result['salt'];
+      $_SESSION['user']    = $result['user'];
+      $_SESSION['admin']   = $result['admin'];
+			redirect('index');
 		}else{
 			queryRedirect('login', 'e', 'login-error');
 		}
