@@ -15,10 +15,10 @@
 <div class="page-wrap grid-x align-center align-middle" style="height:90vh;">
   <div class="cell small-12 medium-6">
     <form id='contactform' class='first_contact' action='assets/build/forms/submit.php' method='post'>
+      <!-- A honey pot will be added here in all forms with js and then hidden.-->
       <input class='animated fadeIn' id='fname' type='text' name='fname' placeholder='first name'/>
       <input class='animated fadeIn' id='lname' type='text' name='lname' placeholder='last name'/>
       <input class='animated fadeIn' id='email' type='email' name='email' placeholder='email'/>
-
       <input class='button' type='submit' value='submit'/>
     </form>
   </div>

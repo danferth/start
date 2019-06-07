@@ -36,6 +36,9 @@ $hammer         = true;
 $moment         = true;
 $localforage    = true;
 
+//Vue.js
+$useVuejs       = true;
+
 //google stuff
 $googleAnalytics = "";
 $gmailUser       = "user@gmail.com";
