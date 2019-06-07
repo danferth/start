@@ -9,9 +9,8 @@ $next_page = 'form.php';
 header('HTTP/1.1 303 See Other');
 //trim post
 array_walk($_POST, 'trim_value');
-//Honeypot variables
-$honeypotCSS = filter_var($_POST['your-name925htj'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
-$honeypotJS = filter_var($_POST['your-email247htj'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
+//Honeypot variable
+$honeypotJS = filter_var($_POST['your-email247'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
 //Email variables
 $fname   = filter_var($_POST['fname'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
 $lname   = filter_var($_POST['lname'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
@@ -25,15 +24,15 @@ formTimeCheck(1, $next_page);
 //CHECK required inputs=====================================
 //put required variables into array
 $required = array($fname, $lname, $email);
-checkRequired($required,  $siteRoot, $next_page, $query_string);
+checkRequired($required, $next_page, $query_string);
 //Validate email===========================================
 //put any emails that need to be validated into an array
 $checkTheseEmails = array($email);
-checkEmailValid($checkTheseEmails,  $siteRoot, $next_page, $query_string);
+checkEmailValid($checkTheseEmails, $next_page, $query_string);
 
 //check the honeypots======================================
 //put honeypots into array
-$honeypots = array($honeypotCSS, $honeypotJS);
+$honeypots = array($honeypotJS);
 checkHoneypot($honeypots,  $next_page);
 //all must be good, lets send a few emails==============================
 $body  = sprintf("<html>");
@@ -50,6 +49,7 @@ $body .= sprintf("\nSender's IP: %s<br />\n", $_SERVER['REMOTE_ADDR']);
 $body .= sprintf("\nReceived: %s<br />\n",date("Y-m-d H:i:s"));
 $body .= sprintf("</body>");
 $body .= sprintf("</html>");
+
 $mail = new PHPMailer;
 if($mail_method == true){
   $mail->isSMTP();
@@ -98,4 +98,5 @@ if (!$mail->send()) {
 	$query_string = '?success=true';
 	header('Location:' . $siteRoot . $next_page . $query_string);
 }
+
 ?>

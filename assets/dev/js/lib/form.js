@@ -2,7 +2,15 @@
 //feedback from form entry wipe this and write your own and don't forget to alter
 //the forms/submit.php to accommodate your own whatever you do.
 if($('body').hasClass('hasForm')){
-  $('#your-name925htj').hide();
+  //set honeypot var
+  var honey = Math.floor(Math.random() * (66666 - 123) + 123);
+  //the honeypot
+  var honeypot = "<input type='text' name='your-email247' id='your-email247' autocomplete='" + honey + "'/>";
+  $('form').prepend(honeypot);
+  $('#your-email247').hide();
+  // shut up the console
+  var form_success;
+  //These are the swal2 popups on form completion.
   if(form_success == "true"){
   	window.onload = swal({
   		title: 'Success',
@@ -14,13 +22,6 @@ if($('body').hasClass('hasForm')){
   	window.onload = swal({
   		title: 'Whoops',
   		text: "error_message to be set in form.js",
-  		type: 'error',
-  		confirmButtonText: 'OK'
-  });
-  }else if(form_success == "email"){
-  	window.onload = swal({
-  		title: 'Error',
-  		text: 'It seems there was an error with your email entry, please make sure it is a valid email and try to submit again.',
   		type: 'error',
   		confirmButtonText: 'OK'
   });

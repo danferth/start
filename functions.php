@@ -11,7 +11,7 @@ if($_SERVER['HTTPS'] === "on"){
 
 $siteRoot = $protocol . $_SERVER['HTTP_HOST'] . '/';
 if($maintenance['status']){
-    header('Location: ' . $siteRoot . $maintenance['file']);
+  header('Location: ' . $siteRoot . $maintenance['file']);
 	exit();
 }
 
@@ -73,7 +73,7 @@ function checkRequired($requiredArray, $next_page){
   }
   //redirect back with error
   if($requiredCount > 0){
-    $query_string .= '?e=requiredInput';
+    $query_string = '?e=requiredInput';
     header('Location:' . $siteRoot . $next_page . $query_string);
     exit();
   }
@@ -92,7 +92,7 @@ function checkEmailValid($emailArray, $next_page){
   //if $isEmailValis is greater than 0 then there are issues with one
   //or more of the emails so redirect to form and trigger error message
   if($isEmailValid > 0){
-    $query_string .= '?e=email';
+    $query_string = '?e=email';
     header('Location:' . $siteRoot . $next_page . $query_string);
     exit();
   }
@@ -118,7 +118,7 @@ function checkHoneypot($honeyArray, $next_page){
 function formTimeCheck($formTimeLimit, $next_page){
   global $siteRoot;
   if(!isset($_SESSION['formLoadTime'])){
-    $query_string .= '?e=formtime';
+    $query_string = '?e=formtime';
     header('Location:' . $siteRoot . $next_page . $query_string);
     exit();
   }else{
@@ -127,7 +127,7 @@ function formTimeCheck($formTimeLimit, $next_page){
     $formSubmitTime = time();
     $formTimeSeconds = $formSubmitTime - $formLoadTime;
     if($formTimeSeconds < $formTimeLimit){
-      $query_string .= '?e=formtime';
+      $query_string = '?e=formtime';
       header('Location:' . $siteRoot . $next_page . $query_string);
       exit();
     }

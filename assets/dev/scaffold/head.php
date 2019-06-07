@@ -13,11 +13,6 @@ if($hasForm){
     $_SESSION['formLoadTime'] = time();
   }else{
     $_SESSION['formLoadTime'] = time();
-  };
-  //grab the get from parse file
-  if(empty($_GET)){
-    $rand_str1 = substr(md5(rand()), 0, 7);
-    $rand_str2 = substr(md5(rand()), 0, 7);
   }
 }
 //*************************************
@@ -82,7 +77,7 @@ if(!empty($_GET)){
         $siteError = "A user with that username already exist.";
         break;
       case 'badpass':
-        $siteError = "passwords did not match, try again.";
+        $siteError = "Passwords did not match, try again.";
         break;
       case 'formtime':
         $siteError = "That was a bit fast? Are you a bot?";
