@@ -17,7 +17,7 @@
   <div class="cell small-12">
     <h3>About</h3>
     <p>About this site<i class="fa fa-smile-o"></i></p>
-    <p>This page is also set to be restricted so you would have to have logged in to see it</p>
+    <p>This page is also set to be restricted (if $useLogin is enabled) so you would have to have logged in to see it</p>
   </div>
 
 
