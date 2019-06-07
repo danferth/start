@@ -21,7 +21,7 @@ $email   = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 //==========================================================
 //CHECK form completion time=====================================
 //first variable passed to function should be seconds for minimum completion
-formTimeCheck(1, $siteRoot, $next_page, $query_string);
+formTimeCheck(1, $next_page);
 //CHECK required inputs=====================================
 //put required variables into array
 $required = array($fname, $lname, $email);
@@ -34,7 +34,7 @@ checkEmailValid($checkTheseEmails,  $siteRoot, $next_page, $query_string);
 //check the honeypots======================================
 //put honeypots into array
 $honeypots = array($honeypotCSS, $honeypotJS);
-checkHoneypot($honeypots,  $siteRoot, $next_page, $query_string);
+checkHoneypot($honeypots,  $next_page);
 //all must be good, lets send a few emails==============================
 $body  = sprintf("<html>");
 $body .= sprintf("<body>");

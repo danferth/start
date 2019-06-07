@@ -25,7 +25,7 @@ with the appropriate variables to connect to your db
 ******************************************************* */
 $useDB          = true;
 $useLogin       = true;
-$fullSiteSecure = false;
+$fullSiteSecure = true;
 //uncomment _connection line below and go to file and fill in credentials
 include 'assets/build/db/_connection.php';
 

@@ -61,7 +61,8 @@ function trim_value(&$value){
 };
 
 //check if required elements have a value
-function checkRequired($requiredArray,  $siteRoot, $next_page, $query_string){
+function checkRequired($requiredArray, $next_page){
+  global $siteRoot;
   //set counter to 0
   $requiredCount = 0;
   //check for empty fields
@@ -72,14 +73,15 @@ function checkRequired($requiredArray,  $siteRoot, $next_page, $query_string){
   }
   //redirect back with error
   if($requiredCount > 0){
-    $query_string .= '&success=required';
+    $query_string .= '?e=requiredInput';
     header('Location:' . $siteRoot . $next_page . $query_string);
     exit();
   }
 };
 
 //check emails if they are valid or not and return with error if so
-function checkEmailValid($emailArray, $siteRoot, $next_page, $query_string){
+function checkEmailValid($emailArray, $next_page){
+  global $siteRoot;
   $isEmailValid = 0;
   foreach($emailArray as $emailToCheck){
     $check = filter_var($emailToCheck, FILTER_VALIDATE_EMAIL);
@@ -90,14 +92,15 @@ function checkEmailValid($emailArray, $siteRoot, $next_page, $query_string){
   //if $isEmailValis is greater than 0 then there are issues with one
   //or more of the emails so redirect to form and trigger error message
   if($isEmailValid > 0){
-    $query_string .= '&success=email';
+    $query_string .= '?e=email';
     header('Location:' . $siteRoot . $next_page . $query_string);
     exit();
   }
 };
 
 //check honeypots
-function checkHoneypot($honeyArray, $siteRoot, $next_page, $query_string){
+function checkHoneypot($honeyArray, $next_page){
+  global $siteRoot;
   $honeyCount = 0;
   foreach($honeyArray as $honey){
     if($honey !== ''){
@@ -105,18 +108,17 @@ function checkHoneypot($honeyArray, $siteRoot, $next_page, $query_string){
     }
   }
   if($honeyCount > 0){
-    $query_string = '?first_name=Edward';
-		$query_string .= '&success=true';
+    $query_string = '?e=honey';
 		header('Location:' . $siteRoot . $next_page . $query_string);
 		exit();
   }
 };
 
 //Form time to complete
-function formTimeCheck($formTimeLimit, $siteRoot, $next_page, $query_string){
-
+function formTimeCheck($formTimeLimit, $next_page){
+  global $siteRoot;
   if(!isset($_SESSION['formLoadTime'])){
-    $query_string .= '&success=false';
+    $query_string .= '?e=formtime';
     header('Location:' . $siteRoot . $next_page . $query_string);
     exit();
   }else{
@@ -125,7 +127,7 @@ function formTimeCheck($formTimeLimit, $siteRoot, $next_page, $query_string){
     $formSubmitTime = time();
     $formTimeSeconds = $formSubmitTime - $formLoadTime;
     if($formTimeSeconds < $formTimeLimit){
-      $query_string .= '&success=false';
+      $query_string .= '?e=formtime';
       header('Location:' . $siteRoot . $next_page . $query_string);
       exit();
     }

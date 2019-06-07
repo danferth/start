@@ -58,24 +58,47 @@ if($useDB && $useLogin){
 if(!empty($_GET)){
   // 'm' or messages
   if(isset($_GET['m'])){
-  	if($_GET['m'] === "newUserSuccess"){
-  		$siteMessage = "New user created successfully";
+    switch ($_GET['m']) {
+      case 'newUserSuccess':
+        $siteMessage = "New user created successfully";
+        break;
+
+      default:
+        $siteMessage = "";
+        break;
     }
   }
 
   // 'e' or errors
   if(isset($_GET['e'])){
-    if($_GET['e'] === "login-error"){
-      $siteError = "Username or Password is Incorrect";
-    }
-    if($_GET['e'] === "timeout"){
-  		$siteError = "Sorry but you have been logged out due to inactivity";
-  	}
-    if($_GET['e'] === "userAlreadyExists"){
-      $siteError = "A user with that username already exist.";
-    }
-    if($_GET['e'] === "badpass"){
-      $siteError = "passwords did not match, try again.";
+    switch ($_GET['e']) {
+      case 'login-error':
+        $siteError = "Username or Password is Incorrect";
+        break;
+      case 'timeout':
+        $siteError = "Sorry but you have been logged out due to inactivity";
+        break;
+      case 'userAlreadyExists':
+        $siteError = "A user with that username already exist.";
+        break;
+      case 'badpass':
+        $siteError = "passwords did not match, try again.";
+        break;
+      case 'formtime':
+        $siteError = "That was a bit fast? Are you a bot?";
+        break;
+      case 'honey':
+        $siteError = "Looks like you left a few blank, try again please!";
+        break;
+      case 'email':
+        $siteError = "Looks like one or more of your emails are bad, try again.";
+        break;
+      case 'requiredInput':
+        $siteError = "You missed one or more required fields.";
+        break;
+      default:
+        $siteError = "";
+        break;
     }
   }
 
