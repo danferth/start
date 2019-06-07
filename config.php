@@ -23,11 +23,11 @@ before setting $useDB to true make sure you have a db in place
 AND have assets/dev/db/_connection.php filled in
 with the appropriate variables to connect to your db
 ******************************************************* */
-$useDB          = true;
-$useLogin       = true;
-$fullSiteSecure = true;
+$useDB          = false;
+$useLogin       = false;
+$fullSiteSecure = false;
 //uncomment _connection line below and go to file and fill in credentials
-include 'assets/build/db/_connection.php';
+//include 'assets/build/db/_connection.php';
 
 //enable scripts
 $gsap           = true;
