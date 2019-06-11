@@ -1,11 +1,11 @@
 #=======================-IP BLOCKS-=============================
 #is your using for development you can block the world
 #from seeing the site by inputing your IP here.
-#<Files *>
-#  <RequireAll>
-#    Require ip [your IP]
-#  </RequireAll>
-#</Files>
+<Files *>
+  <RequireAll>
+    Require ip 68.15.23.243
+  </RequireAll>
+</Files>
 #=====================-END IP BLOCKS-===========================
 
 #=======================-header expires-=============================
