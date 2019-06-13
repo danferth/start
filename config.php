@@ -44,7 +44,7 @@ $useVuejs       = false;
 $googleAnalytics = "";
 $gmailUser       = "user@gmail.com";
 $gmailPass       = "passW0rd";
-
+$my_email        = "email to send to";
 //global loader
 $globalLoader   = false;
 

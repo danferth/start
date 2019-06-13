@@ -61,6 +61,8 @@ if($mail_method == true){
   $mail->Debugoutput = 'html';
   //after testing comment out the above two(2) lines
   $mail->Host = 'smtp.gmail.com';
+  //if using IPv6 use HOST below
+  //$mail->Host = gethostbyname('smtp.gmail.com');
   $mail->Port = 587;
   $mail->SMTPSecure = 'tls';
   $mail->SMTPAuth = true;
@@ -68,7 +70,7 @@ if($mail_method == true){
   //need to fill these out
   //**********************
   $mail->Username = $gmailUser;
-  $mail->Password = $gmailpass;
+  $mail->Password = $gmailPass;
 }
 $mail->setFrom($email, $page);
 $mail->addReplyTo($email, $fname." ".$lname);
@@ -80,7 +82,7 @@ if (!$mail->send()) {
     //log the error
     $mail_error = $mail->ErrorInfo;
 		$error_date = date('m\-d\-Y\-h:iA');
-		$log = "assets/build/forms/logs/error.txt";
+		$log = "logs/error.txt";
 		$fp = fopen($log,"a+");
 		fwrite($fp,$error_date . " | " . $mail_error . "\n");
 		fclose($fp);
@@ -91,7 +93,7 @@ if (!$mail->send()) {
     $success_ip = $_SERVER['REMOTE_ADDR'];
 	$success_date = date('m\-d\-Y\-h:iA');
 	$success_message = $success_date . " | " . $success_ip . " | " . $email;
-	$log = "assets/build/forms/logs/success.txt";
+	$log = "logs/success.txt";
 	$fp = fopen($log,"a+");
 	fwrite($fp,$success_message . "\n");
 	fclose($fp);
