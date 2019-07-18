@@ -15,9 +15,9 @@ So you want a login system for the site, great.....
 require_once '../../../config.php';
 //install variables*************************************************************
 
-$firstUserFname 		   = "dan";
-$firstUserLname 		   = "klotz";
-$firstUser 					   = "danferth@gmail.com";
+$firstUserFname 		   = "firstAdmin";
+$firstUserLname 		   = "lastAdmin";
+$firstUser 					   = "admineamil@email.com";
 $firstUserCustID 		   = "123456";
 $password 				     = "password";
 $verificationCode      = verificationCode();
