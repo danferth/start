@@ -2,30 +2,41 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-include '_connection.php';
-include '../../../functions.php';
+require_once '../../../config.php';
 
 if(isset($_POST['submit'])){
 
-		$suppliedUser = $_POST['user'];
-		$suppliedPass = $_POST['pass'];
+	$suppliedUser = $_POST['user'];
+	$suppliedPass = $_POST['pass'];
+	$q = $db->prepare("SELECT * FROM users WHERE user=:user");
+	$q->bindParam(":user",$suppliedUser);
+	$q->execute();
+	$result = $q->fetch();
+	$q->closeCursor();
 
-	  $q = $db->prepare("SELECT * FROM users WHERE user=:user");
-		$q->bindParam(":user",$suppliedUser);
-		$q->execute();
+	if(password_verify($suppliedPass, $result['pass'])){
+      $_SESSION['name']       = $result['Fname']." ".$result['Lname'];
+			$_SESSION['secure']     = $result['verificationCode'];
+      $_SESSION['user']       = $result['user'];
+      $_SESSION['admin']      = $result['admin'];
+      $_SESSION['userID']     = $result['ID'];
+      $_SESSION['setup']      = $result['setupCompletion'];
+      $_SESSION['customerID'] = $result['customerID'];
 
-		$result = $q->fetch(PDO::FETCH_ASSOC);
-		$q->closeCursor();
-		$testPass = $suppliedPass.$result['salt'];
-		$hashedTestPass = hash('sha512',$testPass);
-
-	if($hashedTestPass === $result['pass']){
-			$_SESSION['secure']  = $result['salt'];
-      $_SESSION['user']    = $result['user'];
-      $_SESSION['admin']   = $result['admin'];
-			redirect('index');
+      if($_SESSION['setup'] === 1){
+        if($result['passwordReset'] === 1){
+          $_SESSION['passwordReset'] = $result['passwordReset'];
+          redirect('form-change-password');
+        }elseif($result['passwordReset'] === 0){
+        redirect('index');
+        }
+      }elseif($_SESSION['setup'] === 0){
+        $_SESSION['verificationCode'] = $result['verificationCode'];
+        $_SESSION['verified'] = 0;
+        redirect('verify');
+      }
 		}else{
-			queryRedirect('login', 'e', 'login-error');
+			sessionRedirect('login', 'e', 'login-error');
 		}
 }
 

@@ -1,6 +1,6 @@
 <?php
 /*
-===============================================================
+================================================================================
 So you want a login system for the site, great.....
 
 1. in config.php enable $useDB and $useLogin
@@ -8,87 +8,130 @@ So you want a login system for the site, great.....
 3. fill in db variables in assets/dev/db/_connection.php
 4. Run this file from the browser after filling in the
    variables as needed and then delete from the server.
-===============================================================
+================================================================================
 */
 
-//Connect to database***********************************************************
-include '_connection.php';
+//Connect to database & a few functions from here*******************************
+require_once '../../../config.php';
 //install variables*************************************************************
 
+$firstUserFname 		   = "dan";
+$firstUserLname 		   = "klotz";
+$firstUser 					   = "danferth@gmail.com";
+$firstUserCustID 		   = "123456";
+$password 				     = "password";
+$verificationCode      = verificationCode();
+$admin 							   = 1; //first user needs to be admin to add subsequent users
+$firstUserSetup			   = 1;
+$passwordReset         = 0;
 
-$firstUser = "admin";
-$initialPass = "password";
-$admin = 1; //first user needs to be admin to add subsequent users
 
-//connect to MySQL & Database***************************************************
-echo "<p>connecting to database...</p>";
-try{
-	$db = new PDO($dsn,$db_user,$db_pass);
-	if($db){
-		echo "<p><strong>connection established...</strong></p>";
-	}
-}catch(PDOEXception $e){
-	echo "connection failed:" . $e->getMessage();
-	exit;
+
+//see if table exsist.
+$q = $db->query("SHOW TABLES LIKE 'users'");
+$testCount = $q->rowCount();
+$q->closeCursor();
+if($testCount !== 0){
+  echo "table already exsist! why are you trying to install again?";
+  die();
 }
+
+
 
 //create USERS table************************************************************
 echo "creating users table...</p>";
 $q = "CREATE TABLE IF NOT EXISTS users(
 	`ID` INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(ID),
-	`user` VARCHAR(20),
+	`Fname` VARCHAR(20),
+	`Lname` VARCHAR(20),
+	`user` VARCHAR(200),
+	`customerID` VARCHAR(200),
 	`pass` VARCHAR(250),
-	`salt` VARCHAR(200),
-	`admin` BOOLEAN
+	`admin` BOOLEAN,
+  `verificationCode` VARCHAR(200),
+	`setupCompletion` BOOLEAN,
+  `passwordReset` BOOLEAN,
+	`prefShipContact_attn` VARCHAR(50),
+	`prefShipContact_bizName` VARCHAR(50),
+	`prefShipTo_address1` VARCHAR(200),
+	`prefShipTo_address2` VARCHAR(200),
+	`prefShipTo_city` VARCHAR(50),
+	`prefShipTo_state` VARCHAR(50),
+	`prefShipTo_zip` VARCHAR(20),
+	`prefShipTo_notes` VARCHAR(250),
+	`shipOptions_residentialDelivery` BOOLEAN,
+	`shipOptions_saturdayDelivery` BOOLEAN,
+	`shipOptions_insurance` BOOLEAN,
+	`shipOptions_useCustomerAccount` BOOLEAN,
+	`shipOptions_customerShipperPref` VARCHAR(200),
+	`shipOptions_customerAccountNumber` VARCHAR(200),
+	`completedOrders` VARCHAR(250)
 	)";
-$result = $db->query($q);
-if(!$result) {
-    die(print_r($db->errorInfo(), TRUE));
-}
-echo "<p>testing to see if <strong>users</strong> table exists...</p>";
-$q = "SHOW TABLES LIKE 'users'";
-$result = $db->query($q);
-if(!$result) {
-    die(print_r($db->errorInfo(), TRUE));
-}
-if($result->rowCount()>0)
-	{
-		echo "<p><strong>table exists...</strong></p>";
-		$result->closeCursor();
-	}
-//enter first user**************************************************************
-$q = ("SELECT * FROM users LIMIT 1");
-$query = $db->query($q);
-$result = $query->fetch(PDO::FETCH_ASSOC);
-if($result) {
-    echo "<p>Users table contains users no need to input first user</p>";
-}else{
-	echo "<p>entering first user...</p>";
+
+  $createTable = $db->query($q);
+  $createTable->execute();
+  $createTable->closeCursor();
+
+
+echo "<p>Created table <b>users</b>...</p>";
+
+
+
+
+
+
+
+
 //Create first user*************************************************************
-$createdSalt = rand(1000,1000000);
-$suppliedPass = $initialPass;
-$password = $suppliedPass.$createdSalt;
-$hashedPass = hash('sha512',$password);
-$q = $db->prepare("INSERT INTO users (`ID`, `user`, `pass`, `salt`, `admin`) VALUES (NULL,:user, :pass, :salt, :admin)");
-	$q->bindParam(":user", $firstUser);
-	$q->bindParam(":pass", $hashedPass);
-	$q->bindParam(":salt", $createdSalt);
-	$q->bindParam(":admin", $admin);
-	$q->execute();
-if(!$q){
-		die(print_r($db->errorInfo(), TRUE));
-	}
-	if($q){
-		echo "<p><strong>first user entered...</strong></p>";
-		$q->closeCursor();
-	}
-}
+echo "<p>entering first user...</p>";
+$hashedPass = password_hash($password, PASSWORD_BCRYPT, $bcryptOptions);
+$q = $db->prepare("INSERT INTO users (`ID`,
+                                      `Fname`,
+                                      `Lname`,
+                                      `user`,
+                                      `customerID`,
+                                      `pass`,
+                                      `admin`,
+                                      `verificationCode`,
+                                      `setupCompletion`,
+                                      `passwordReset`)
+                                      VALUES (NULL,
+                                              :Fname,
+                                              :Lname,
+                                              :user,
+                                              :customerID,
+                                              :pass, :admin,
+                                              :verificationCode,
+                                              :setupCompletion,
+                                              :passwordReset)");
+$q->bindParam(":Fname", $firstUserFname);
+$q->bindParam(":Lname", $firstUserLname);
+$q->bindParam(":user", $firstUser);
+$q->bindParam(":customerID", $firstUserCustID);
+$q->bindParam(":pass", $hashedPass);
+$q->bindParam(":admin", $admin);
+$q->bindParam(":verificationCode", $verificationCode);
+$q->bindParam(":setupCompletion", $firstUserSetup);
+$q->bindParam(":passwordReset", $passwordReset);
+$q->execute();
+$q->closeCursor();
+echo "<p><b>first user entered...</b></p>";
+
+
+
+
+
+
+
+
+
 //output user and close connection**********************************************
-$q = "SELECT * FROM users";
+$q = "SELECT * FROM users WHERE ID=1";
 $result = $db->query($q);
-while($arr = $result->fetch(PDO::FETCH_ASSOC)){
-	echo $arr['ID']." | <strong>username</strong> = " . $arr['user'] . " created as ADMIN ready to start<br>";
+
+while($arr = $result->fetch()){
+	echo $arr['ID']." | <b>username</b> = " . $arr['user'] . " created as ADMIN ready to start<br>";
 }
 $result->closeCursor();
 $db = null;
@@ -96,4 +139,6 @@ if(is_null($db)){
 	echo "<p>connection closed...</p>";
 }
 echo "<a href='/login.php'>go to login</a>";
+
+
 ?>

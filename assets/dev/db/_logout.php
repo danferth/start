@@ -2,8 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-include '_connection.php';
-include '../../../functions.php';
+require_once '../../../config.php';
 
 session_unset();
 session_destroy();

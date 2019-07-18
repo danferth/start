@@ -57,7 +57,7 @@ exports.help = helpTask;
 //=======stylesheet===========================================================================
 //sourcemaps | sass | prefix | minimize
 function cssTask(){
-  var processors = [autoprefixer({browsers:['last 2 versions', 'ie >= 9', 'android >= 4.4', 'ios >= 7']}),cssnano];
+  var processors = [autoprefixer(),cssnano];
   return gulp.src(css_src + '/' +css_file + '.scss')
   .pipe(sasslint())
   .pipe(sasslint.format())

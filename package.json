@@ -31,5 +31,17 @@
     "jshint": "^2.10.2",
     "jshint-stylish": "^2.2.1",
     "mkdirp": "^0.5.1"
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "postcss":{
+    "plugins":{
+      "autoprefixer":{}
+    }
+  },
+  "scripts":{
+    "build:css": "postcss src/app.css -o build/app.css",
+    "build": "npm run build.css"
   }
 }

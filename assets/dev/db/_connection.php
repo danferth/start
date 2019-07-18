@@ -1,9 +1,20 @@
 <?php
-$db_name    = 'test';
+$db_name    = 'databaseName';
 $db_server  = 'localhost';
-$db_user    = 'tester';
-$db_pass    = '123456';
+$db_user    = 'databaseUser';
+$db_pass    = 'databaseUserPass';
 // =================================================
 $dsn = "mysql:host=".$db_server.";dbname=".$db_name;
-$db = new PDO($dsn,$db_user,$db_pass);
+
+$dbOptions = [
+  PDO::ATTR_ERRMODE             => PDO::ERRMODE_EXCEPTION,
+  PDO::ATTR_DEFAULT_FETCH_MODE  => PDO::FETCH_ASSOC,
+  PDO::ATTR_EMULATE_PREPARES    => false
+];
+
+try{
+  $db = new PDO($dsn, $db_user, $db_pass, $dbOptions);
+} catch(PDOException $e){
+  throw new PDOException($e->getMessage(), (int)$e->getCode());
+}
 ?>

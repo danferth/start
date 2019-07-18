@@ -30,20 +30,24 @@ function PHPMailerAutoload($classname)
     }
 }
 
-if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
-    //SPL autoloading was introduced in PHP 5.1.2
-    if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
-        spl_autoload_register('PHPMailerAutoload', true, true);
-    } else {
-        spl_autoload_register('PHPMailerAutoload');
-    }
-} else {
-    /**
-     * Fall back to traditional autoload for old PHP versions
-     * @param string $classname The name of the class to load
-     */
-    function __autoload($classname)
-    {
-        PHPMailerAutoload($classname);
-    }
-}
+
+//This was causeing an error even on php 7.2 so commenting out
+//and putting in just what needs to be done
+spl_autoload_register('PHPMailerAutoload', true, true);
+// if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
+//     //SPL autoloading was introduced in PHP 5.1.2
+//     if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
+//         spl_autoload_register('PHPMailerAutoload', true, true);
+//     } else {
+//         spl_autoload_register('PHPMailerAutoload');
+//     }
+// } else {
+//     /**
+//      * Fall back to traditional autoload for old PHP versions
+//      * @param string $classname The name of the class to load
+//      */
+//     function __autoload($classname)
+//     {
+//         PHPMailerAutoload($classname);
+//     }
+// }

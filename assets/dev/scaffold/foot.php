@@ -3,7 +3,7 @@
 <div class="footer">
 	<div class="grid-x">
 		<div class="cell small-12">
-			<p><i class="fa fa-copyright"></i> <?php echo date(Y); ?> danferth</p>
+			<p><i class="fa fa-copyright"></i> <?php echo date('Y'); ?> danferth</p>
 		</div>
 	</div>
 </div>
@@ -54,6 +54,32 @@
 <!-- site.js-->
 <script type="text/javascript" src="assets/build/js/site.js?ver=<?php echo $GLOBALS['v']; ?>"></script>
 
+<!-- errors & messages -->
+<?php
+  //error & message callouts
+  if(isset($_SESSION['m'])){
+    echo '<script type="text/javascript">';
+    echo 'Swal.fire({';
+    echo "title: 'FYI',";
+    echo "text: '".$siteMessage."',";
+    echo "type: 'info',";
+    echo "confirmButtonText: 'OK',";
+    echo "onClose: closeMessage,";
+    echo '});';
+    echo '</script>';
+  }
+  if(isset($_SESSION['e'])){
+    echo '<script type="text/javascript">';
+    echo 'Swal.fire({';
+    echo "title: 'Whoops!',";
+    echo "text: '".$siteError."',";
+    echo "type: 'error',";
+    echo "confirmButtonText: 'OK',";
+    echo "onClose: closeError,";
+    echo '});';
+    echo '</script>';
+  }
+ ?>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <?php
 if($googleAnalytics != ""){

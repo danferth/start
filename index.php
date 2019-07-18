@@ -2,7 +2,7 @@
   require('config.php');
   //set title and description for page
   $title          = 'home';
-  $description    = 'description for page';
+  $description    = 'Home start page of site';
   $pageLoader     = false;
   $hasForm        = false;
   //for login use only
@@ -17,6 +17,7 @@
   <div class="cell small-12">
     <h3>Home</h3>
     <p>This is home<i class="fa fa-smile-o"></i></p>
+    <p><a class ="button" href="assets/build/db/_test.php">go to _test.php</a></p>
   </div>
 
 </div>
