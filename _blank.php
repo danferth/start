@@ -1,8 +1,8 @@
 <?php
   require('config.php');
   //set title and description for page
-  $title          = 'home';
-  $description    = 'Home start page of site';
+  $title          = '_blank';
+  $description    = 'Use this to start a page';
   $pageLoader     = false;
   $hasForm        = false;
   //for login use only
@@ -15,12 +15,13 @@
 <!-- START -->
 <div class="page-wrap grid-x" style="height:90vh;">
   <div class="cell small-12">
-    <h3>Home</h3>
-    <p>This is home<i class="fa fa-smile-o"></i></p>
-    <p><a class ="button" href="assets/build/db/_test.php">go to _test.php</a></p>
-    <p><a class ="button" href="_sink.php">kitchen sink</a></p>
-  </div>
 
+
+    <!-- This is a blank page. Add content here -->
+    <!-- See foundation examples at https://foundation.zurb.com/sites/docs/kitchen-sink.html -->
+
+
+  </div>
 </div>
 <!-- END -->
 

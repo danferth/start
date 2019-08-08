@@ -7,11 +7,11 @@
 
 //color=======================================
 $base-color      : hsla(200, 3%, 67%, 1);
-$primary-color   : #35435a;
-$secondary-color : #ceb390;
-$success-color   : #726a4e;
-$warning-color   : #d5ae3f;
-$alert-color     : #c3322c;
+$primary-color   : #1E0F00;
+$secondary-color : #6D3400;
+$success-color   : #63895F;
+$warning-color   : #FFC549;
+$alert-color     : #C63737;
 
 $c-white       : scale-color($base-color, $lightness: 100%);
 $c-white-1     : scale-color($base-color, $lightness: 99%);
@@ -915,4 +915,3 @@ $grid-padding-gutters: $grid-margin-gutters;
 $grid-container-padding: $grid-padding-gutters;
 $grid-container-max: $global-width;
 $xy-block-grid-max: 8;
-
