@@ -1,3 +1,4 @@
 .htaccess
+config.php
 node_modules/**/**
 assets/build/**/**

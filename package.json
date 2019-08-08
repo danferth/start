@@ -36,12 +36,12 @@
   "browserslist": [
     "defaults"
   ],
-  "postcss":{
-    "plugins":{
-      "autoprefixer":{}
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
     }
   },
-  "scripts":{
+  "scripts": {
     "build:css": "postcss src/app.css -o build/app.css",
     "build": "npm run build.css"
   }
