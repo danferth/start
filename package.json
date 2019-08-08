@@ -30,7 +30,8 @@
     "imagemin-pngquant": "^7.0.0",
     "jshint": "^2.10.2",
     "jshint-stylish": "^2.2.1",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+    "beepbeep": "^1.2.2"
   },
   "browserslist": [
     "defaults"
