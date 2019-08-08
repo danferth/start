@@ -1,9 +1,4 @@
 <?php
-$db_name    = 'databaseName';
-$db_server  = 'localhost';
-$db_user    = 'databaseUser';
-$db_pass    = 'databaseUserPass';
-// =================================================
 $dsn = "mysql:host=".$db_server.";dbname=".$db_name;
 
 $dbOptions = [

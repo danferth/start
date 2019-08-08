@@ -56,6 +56,13 @@ $fullSiteSecure = false;
 // functions
 require_once 'functions.php';
 
-//uncomment _connection line below and go to file and fill in credentials
+//uncomment CONNECTION line below and uncomment and fill in CREDENTIALS
+// CREDENTIALS==================================================================
+//$db_name    = 'databaseName';
+//$db_server  = 'localhost';
+//$db_user    = 'databaseUser';
+//$db_pass    = 'databaseUserPassword';
+
+// CONNECTION===================================================================
 //require_once 'assets/build/db/_connection.php';
 ?>

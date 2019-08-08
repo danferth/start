@@ -18,7 +18,6 @@
     <h3>Home</h3>
     <p>This is home<i class="fa fa-smile-o"></i></p>
     <p><a class ="button" href="assets/build/db/_test.php">go to _test.php</a></p>
-    <p><a class ="button" href="_sink.php">kitchen sink</a></p>
   </div>
 
 </div>
