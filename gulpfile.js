@@ -17,7 +17,8 @@ var Promise         = require('es6-promise').Promise,
     pngquant        = require('imagemin-pngquant'),
     mkdirp          = require('mkdirp'),
     createFile      = require('create-file'),
-    zip             = require('gulp-zip');
+    zip             = require('gulp-zip'),
+    beep            = require('beepbeep');
 //=======options==============================================================================
 var css_file    = "site",
     css_src     = "assets/dev/scss",
@@ -41,14 +42,16 @@ var swallowError = function(error){
 function helpTask(cb){
   console.log("****************************************************************************************".bold.white.bgYellow);
   console.log("css                = sourcemaps | sass | prefix | minimize | filesize".cyan);
-  console.log("checkjs            = jslint | filesize (only site.js)".yellow);
-  console.log("js                 = concat | uglify | filesize".yellow);
+  console.log("jsCat              = concat js files".yellow);
+  console.log("checkjs            = jslint".yellow);
+  console.log("jsUgly             = uglify concatonated js file".yellow);
   console.log("image              = optimize images and save to build dir".magenta);
   console.log("----------------------------------------------------------------------------------------".america);
-  console.log("watch (default)    = css, checkjs, js".bold.green);
-  console.log("build              = css, js, & image + moves scaffold and other folders to build".bold.green);
-  console.log("package            = all build files and files in root copied to package/".bold.blue);
+  console.log("watch (default)    = css, checkjs, jsCat, image, moves files".bold.green);
+  console.log("build              = css, ALLjs, & image + moves files to build".bold.green);
+  console.log("package            = all build files and files in root copied to package/ then .zip".bold.blue);
   console.log("clean              = deletes package and build directories and package.zip".bold.blue);
+  console.log("nodb               = removes all files needed for db usage.".red);
   console.log("****************************************************************************************".bold.white.bgYellow);
   cb();
 };
@@ -66,7 +69,8 @@ function cssTask(){
   .on('error', swallowError)
   .pipe(postcss(processors))
   .pipe(sourcemaps.write())
-  .pipe(gulp.dest(css_dest));
+  .pipe(gulp.dest(css_dest))
+  .on('end', function(){ beep(3); });
 };
 exports.css = cssTask;
 
@@ -75,7 +79,8 @@ exports.css = cssTask;
 function jsCatTask(){
   return gulp.src([js_src + '/lib/**/*.js', js_src + '/' + js_file + '.js'])
   .pipe(concat(js_file + '.js'))
-  .pipe(gulp.dest(js_dest));
+  .pipe(gulp.dest(js_dest))
+  .on('end', function(){ beep(3); });
 };
 exports.jsCat = jsCatTask;
 
@@ -184,6 +189,15 @@ function cleanTask(cb){
   cb();
 };
 exports.clean = cleanTask;
+//=======NODB=================================================================================
+function nodbTask(cb){
+  del('verify/**');
+  del(['verify.php', 'login.php', 'form-setup.php', 'form-reset-password.php', 'form-quote-entry.php', 'form-edit-profile.php', 'form-change-password.php', 'admin.php']);
+  del('assets/dev/db/**/**');
+  del('assets/dev/forms/request-verification.php');
+  cb();
+};
+exports.nodb = nodbTask;
 //=======watch================================================================================
 function watchTask(){
   gulp.watch(css_src + '/**/*.scss', cssTask);
@@ -191,6 +205,7 @@ function watchTask(){
   gulp.watch('assets/dev/forms/**/**', moveFORMStask);
   gulp.watch('assets/dev/db/**/**', moveDBtask);
   gulp.watch('assets/dev/scaffold/**/**', moveScaffoldTask);
+  gulp.watch('assets/dev/images/**/**', imageTask);
 };
 exports.watch = watchTask;
 //default Task
