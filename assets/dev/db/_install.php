@@ -13,13 +13,9 @@ So you want a login system for the site, great.....
 
 //Connect to database & a few functions from here*******************************
 require_once '../../../config.php';
-//install variables*************************************************************
+//install variables for use with first or (admin) user**************************
 
-$firstUserFname 		   = "firstAdmin";
-$firstUserLname 		   = "lastAdmin";
-$firstUser 					   = "admineamil@email.com";
-$firstUserCustID 		   = "123456";
-$password 				     = "password";
+// !!!!!! first or (admin) user credential setup is in config.php
 $verificationCode      = verificationCode();
 $admin 							   = 1; //first user needs to be admin to add subsequent users
 $firstUserSetup			   = 1;
@@ -101,7 +97,8 @@ $q = $db->prepare("INSERT INTO users (`ID`,
                                               :Lname,
                                               :user,
                                               :customerID,
-                                              :pass, :admin,
+                                              :pass,
+                                              :admin,
                                               :verificationCode,
                                               :setupCompletion,
                                               :passwordReset)");

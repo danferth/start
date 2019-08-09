@@ -17,16 +17,9 @@ foreach($q as $user){
 }
 $q->closeCursor();
 
-$q = $db->prepare("SELECT Fname FROM users WHERE setupCompletion=:setupCompletion");
-$q->execute(["setupCompletion" => 0]);
-
-$rslt = $q->fetchAll();
-
-dump($rslt);
-$q->closeCursor();
 echo "<br/><br/>";
 
-$q = $db->query("SELECT Fname FROM users");
+$q = $db->query("SELECT * FROM users");
 $rslt = $q->fetchAll();
 dump($rslt);
 

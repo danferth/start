@@ -79,10 +79,10 @@
     echo '});';
     echo '</script>';
   }
- ?>
+?>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <?php
-if($googleAnalytics != ""){
+if($production){
 	echo "<script async src='https://www.googletagmanager.com/gtag/js?id=" . $googleAnalytics . "'></script>";
 	echo "<script>";
 	echo "  window.dataLayer = window.dataLayer || [];\n";
@@ -94,7 +94,7 @@ if($googleAnalytics != ""){
 }else{
 	echo "<!-- no Google Analytics set up -->";
 }
- ?>
+?>
 
 
 	</body>
