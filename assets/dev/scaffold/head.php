@@ -23,15 +23,15 @@ include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/logic_callout.php';
 
         <!-- ***********FAVICON SETTINGS****************** -->
         <!-- generated with the heros at https://realfavicongenerator.net/ -->
-        <link rel="apple-touch-icon" sizes="180x180" href="/assets/build/favicons/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/assets/build/favicons/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/assets/build/favicons/favicon-16x16.png">
-        <link rel="manifest" href="/assets/build/favicons/site.webmanifest">
-        <link rel="mask-icon" href="/assets/build/favicons/safari-pinned-tab.svg" color="#e5b02a">
-        <link rel="shortcut icon" href="/assets/build/favicons/favicon.ico">
-        <meta name="msapplication-TileColor" content="#ffc40d">
-        <meta name="msapplication-config" content="/assets/build/favicons/browserconfig.xml">
-        <meta name="theme-color" content="#f8ebc9">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/build/favicons/apple-touch-icon.png?v=3abc">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/build/favicons/favicon-32x32.png?v=3abc">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/build/favicons/favicon-16x16.png?v=3abc">
+        <link rel="manifest" href="/assets/build/favicons/site.webmanifest?v=3abc">
+        <link rel="mask-icon" href="/assets/build/favicons/safari-pinned-tab.svg?v=3abc" color="#6c996c">
+        <link rel="shortcut icon" href="/assets/build/favicons/favicon.ico?v=3abc">
+        <meta name="msapplication-TileColor" content="#254366">
+        <meta name="msapplication-config" content="/assets/build/favicons/browserconfig.xml?v=3abc">
+        <meta name="theme-color" content="#ffffff">
         <!-- ***********END FAVICON SETTINGS****************** -->
 
         <!-- Humans.txt-->

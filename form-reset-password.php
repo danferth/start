@@ -13,7 +13,7 @@
 
 ?>
 
-<div class="page-wrap grid-x align-center align-middle" style="height: 90vh;">
+<div class="page-wrap grid-x align-center align-middle">
   <div class="cell small-12 medium-4">
     <form id='formResetPassword' class='' action='assets/build/db/_reset_password.php' method='post'>
       <!-- A honey pot will be added here in all forms with js and then hidden.-->

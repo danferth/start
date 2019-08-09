@@ -13,7 +13,7 @@
 ?>
 
 <!-- START -->
-<div class="page-wrap grid-x align-center align-middle" style="height:90vh;">
+<div class="page-wrap grid-x align-center align-middle">
   <div class="cell small-12 medium-4">
     <h4>Login Please</h4>
     <form id="formLogin" action="assets/build/db/_login.php" method="POST">
@@ -29,6 +29,6 @@
 <script type="text/javascript">
   //you have to set hasForm as a class to the body
   document.body.className += " "+"hasForm";
-  var formID = 'formlogin';
+  var formID = "formLogin";
 </script>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/foot.php'; ?>

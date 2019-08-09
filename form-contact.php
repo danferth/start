@@ -12,7 +12,7 @@
   include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
 ?>
 
-<div class="page-wrap grid-x align-center align-middle" style="height:90vh;">
+<div class="page-wrap grid-x align-center align-middle">
   <div class="cell small-12 medium-6">
     <form id='formContact' class='first_contact' action='assets/build/forms/submit-contact.php' method='post'>
       <!-- A honey pot will be added here in all forms with js and then hidden.-->

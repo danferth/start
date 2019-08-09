@@ -7,11 +7,11 @@
 
 //color=======================================
 $base-color      : hsla(200, 3%, 67%, 1);
-$primary-color   : #1E0F00;
-$secondary-color : #6D3400;
-$success-color   : #63895F;
-$warning-color   : #FFC549;
-$alert-color     : #C63737;
+$primary-color   : #6C996C;
+$secondary-color : #254366;
+$success-color   : #1D9323;
+$warning-color   : #BCAD26;
+$alert-color     : #931D1D;
 
 $c-white       : scale-color($base-color, $lightness: 100%);
 $c-white-1     : scale-color($base-color, $lightness: 99%);
