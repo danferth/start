@@ -16,9 +16,11 @@
 <div class="page-wrap grid-x">
   <div class="cell small-12">
     <h3>Home</h3>
-    <p>This is home<i class="fa fa-smile-o"></i></p>
+    <p>This is home <i class="fa fa-smile-o"></i></p>
     <p><a class ="button small" href="assets/build/db/_test.php">go to db/_test.php</a> <a class ="button small" href="_test.php">go to /_test.php</a></p>
   </div>
+
+
 
 </div>
 <!-- END -->
