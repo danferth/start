@@ -54,6 +54,16 @@ include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/logic_callout.php';
       }
     ?>
 <!-- this containing <div> ends in foot.php -->
-<div class="grid-container fluid">
+<div class="grid-container full">
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/nav.php'; ?>
+<?php
+
+if($splashPage['status']){
+  echo "<!-- No navigation needed as looming set -->";
+}else{
+  include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/nav.php';
+}
+
+
+
+ ?>

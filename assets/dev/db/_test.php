@@ -11,19 +11,21 @@ echo "you are on the page for db tests<br/><br/><br/>";
 //******************************************************************************
 //******************************************************************************
 
-$q = $db->query("SELECT * FROM users");
-foreach($q as $user){
-  echo $user['Fname']." ".$user['Lname']."<br/>";
-}
-$q->closeCursor();
+// $q = $db->query("SELECT * FROM users");
+// foreach($q as $user){
+//   echo $user['Fname']." ".$user['Lname']."<br/>";
+// }
+// $q->closeCursor();
+//
+// echo "<br/><br/>";
+//
+// $q = $db->query("SELECT * FROM users");
+// $rslt = $q->fetchAll();
+// dump($rslt);
 
-echo "<br/><br/>";
+echo $currentPage;
 
-$q = $db->query("SELECT * FROM users");
-$rslt = $q->fetchAll();
-dump($rslt);
-
-
+dump($_SERVER);
 
 
 echo "<br/><br/><br/>Done";

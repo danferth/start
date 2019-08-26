@@ -10,9 +10,27 @@ if($_SERVER['HTTPS'] === "on"){
 }
 
 $siteRoot = $protocol . $_SERVER['HTTP_HOST'] . '/';
+
+$currentPage = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+
+//maintenance mode
 if($maintenance['status']){
-  header('Location: ' . $siteRoot . $maintenance['file']);
-	exit();
+  if($currentPage !== $siteRoot . $maintenance['file']){
+    header('Location: ' . $siteRoot . $maintenance['file']);
+	  exit();
+  }
+}
+
+//splash page mode
+if($splashPage['status'] && !$maintenance['status']){
+  if($currentPage !== $siteRoot . $splashPage['file']){
+    if($currentPage === $siteRoot . "assets/build/forms/" . $splashPage['submit']){
+      //it doesn need to be parsed
+    }else{
+      header('Location: ' . $siteRoot . $splashPage['file']);
+	    exit();
+    }
+  }
 }
 
 //check if production then set version.

@@ -1,3 +1,7 @@
+//default has .grid-container set to .full so we need the below to get rid of horizontal scroll bars
+//you can set to .fluid (has a bit of padding on the sides) and comment out the below rule
+body {overflow-x: hidden;}
+
 // put general site styles here
 .welcomeMessage{
   //this is only used if you enabled $useLogin in config.PHP
@@ -7,4 +11,12 @@
   line-height:1;
 }
 
-//this is the wrapper class for the /_test.php kitchen sink page
+//looming page styles
+.looming{
+  h1{
+    text-align:center;
+  }
+  p{
+    text-align:center;
+  }
+}
