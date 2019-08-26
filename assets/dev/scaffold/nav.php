@@ -26,8 +26,3 @@
         </div>
       </div>
 </nav>
-<?php
-
-
-consoleDump($_SESSION);
-?>
