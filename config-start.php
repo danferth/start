@@ -63,6 +63,12 @@ date_default_timezone_set('America/Los_Angeles');
 
 // functions
 require_once 'functions.php';
-//uncomment _connection line below and go to file and fill in credentials
-require_once 'assets/build/db/_connection.php';
+
+//uncomment connection vars and require_once line below and fill in variables
+
+//$db_name    = '';
+//$db_server  = 'localhost';
+//$db_user    = '';
+//$db_pass    = '';
+//require_once 'assets/build/db/_connection.php';
 ?>

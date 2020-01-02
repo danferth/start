@@ -1,9 +1,4 @@
 <?php
-$db_name    = 'startdb';
-$db_server  = 'localhost';
-$db_user    = 'bluntman';
-$db_pass    = 'fireitup!';
-// =================================================
 $dsn = "mysql:host=".$db_server.";dbname=".$db_name;
 
 $dbOptions = [
