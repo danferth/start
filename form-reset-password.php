@@ -1,26 +1,37 @@
 <?php
-  require('config.php');
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
   //set title and description for page
-  $title          = 'reset password';
-  $description    = 'User forgot password and request reset';
+  $title          = 'Password | Reset';
+  $description    = 'Request password reset';
   $pageLoader     = false;
   $hasForm        = true;
   //for login use only
   $restrictedPage = false;
   $adminOnly      = false;
 
+  require_once 'config.php';
   include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
 
 ?>
 
-<div class="page-wrap grid-x align-center align-middle">
-  <div class="cell small-12 medium-4">
+<div class="page-wrap row justify-content-center">
+  <div class="col-sm-12 col-md-8 col-lg-6">
+    <div class="card">
+      <h1 class='h3 card-title card-header bg-info text-white'>Reset Password Request</h1>
+      <div class="card-body">
     <form id='formResetPassword' class='' action='assets/build/db/_reset_password.php' method='post'>
-      <!-- A honey pot will be added here in all forms with js and then hidden.-->
-        <p>Provide your username <i>(email)</i> and we will email you a new temporary password.</p>
-        <input id='email' type='email' name='email' placeholder='username (email)' required/>
-      <input class='button expanded' type='submit' name="submit" value='reset password'/>
+        <div class="form-group">
+          <p>Provide your username <i>(email)</i> and we will email you a new temporary password.</p>
+          <input class='form-control lineInput' id='email' type='email' name='email' placeholder='username (email)' required/>
+        </div>
+        <div class="form-group">
+          <button class='btn btn-primary btn-block buttonLoader' type='submit' name="submit">Reset Password</button>
+        </div
     </form>
+  </div>
+</div>
   </div>
 </div>
 

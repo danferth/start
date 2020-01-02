@@ -13,14 +13,18 @@ So you want a login system for the site, great.....
 
 //Connect to database & a few functions from here*******************************
 require_once '../../../config.php';
-//install variables for use with first or (admin) user**************************
+//install variables*************************************************************
 
-// !!!!!! first or (admin) user credential setup is in config.php
+$firstUserFname 		   = "Dan";
+$firstUserLname 		   = "Klotz";
+$firstUser 					   = "danferth@gmail.com";
+$firstUserCustID 		   = "123456";
+$password 				     = "1121Sc()";
 $verificationCode      = verificationCode();
 $admin 							   = 1; //first user needs to be admin to add subsequent users
 $firstUserSetup			   = 1;
 $passwordReset         = 0;
-
+$introViewed           = 1;
 
 
 //see if table exsist.
@@ -39,21 +43,24 @@ echo "creating users table...</p>";
 $q = "CREATE TABLE IF NOT EXISTS users(
 	`ID` INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(ID),
-	`Fname` VARCHAR(20),
-	`Lname` VARCHAR(20),
-	`user` VARCHAR(200),
+	`Fname` VARCHAR(50),
+	`Lname` VARCHAR(50),
+	`user` VARCHAR(250),
 	`customerID` VARCHAR(200),
 	`pass` VARCHAR(250),
 	`admin` BOOLEAN,
-  `verificationCode` VARCHAR(200),
+  `verificationCode` VARCHAR(250),
 	`setupCompletion` BOOLEAN,
+  `introViewed` BOOLEAN,
   `passwordReset` BOOLEAN,
-	`prefShipContact_attn` VARCHAR(50),
-	`prefShipContact_bizName` VARCHAR(50),
+	`prefShipContact_attn` VARCHAR(200),
+	`prefShipContact_bizName` VARCHAR(200),
+  `prefShipContact_phone` VARCHAR(20),
+  `prefShipContact_ext` VARCHAR(20),
 	`prefShipTo_address1` VARCHAR(200),
 	`prefShipTo_address2` VARCHAR(200),
-	`prefShipTo_city` VARCHAR(50),
-	`prefShipTo_state` VARCHAR(50),
+	`prefShipTo_city` VARCHAR(100),
+	`prefShipTo_state` VARCHAR(100),
 	`prefShipTo_zip` VARCHAR(20),
 	`prefShipTo_notes` VARCHAR(250),
 	`shipOptions_residentialDelivery` BOOLEAN,
@@ -62,7 +69,8 @@ $q = "CREATE TABLE IF NOT EXISTS users(
 	`shipOptions_useCustomerAccount` BOOLEAN,
 	`shipOptions_customerShipperPref` VARCHAR(200),
 	`shipOptions_customerAccountNumber` VARCHAR(200),
-	`completedOrders` VARCHAR(250)
+	`completedOrders` VARCHAR(250),
+  `lastLogin` VARCHAR(100)
 	)";
 
   $createTable = $db->query($q);
@@ -91,16 +99,17 @@ $q = $db->prepare("INSERT INTO users (`ID`,
                                       `admin`,
                                       `verificationCode`,
                                       `setupCompletion`,
+                                      `introViewed`,
                                       `passwordReset`)
                                       VALUES (NULL,
                                               :Fname,
                                               :Lname,
                                               :user,
                                               :customerID,
-                                              :pass,
-                                              :admin,
+                                              :pass, :admin,
                                               :verificationCode,
                                               :setupCompletion,
+                                              :introViewed,
                                               :passwordReset)");
 $q->bindParam(":Fname", $firstUserFname);
 $q->bindParam(":Lname", $firstUserLname);
@@ -110,6 +119,7 @@ $q->bindParam(":pass", $hashedPass);
 $q->bindParam(":admin", $admin);
 $q->bindParam(":verificationCode", $verificationCode);
 $q->bindParam(":setupCompletion", $firstUserSetup);
+$q->bindParam(":introViewed", $introViewed);
 $q->bindParam(":passwordReset", $passwordReset);
 $q->execute();
 $q->closeCursor();

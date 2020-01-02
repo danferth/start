@@ -10,27 +10,9 @@ if($_SERVER['HTTPS'] === "on"){
 }
 
 $siteRoot = $protocol . $_SERVER['HTTP_HOST'] . '/';
-
-$currentPage = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-
-//maintenance mode
 if($maintenance['status']){
-  if($currentPage !== $siteRoot . $maintenance['file']){
-    header('Location: ' . $siteRoot . $maintenance['file']);
-	  exit();
-  }
-}
-
-//splash page mode
-if($splashPage['status'] && !$maintenance['status']){
-  if($currentPage !== $siteRoot . $splashPage['file']){
-    if($currentPage === $siteRoot . "assets/build/forms/" . $splashPage['submit']){
-      //it doesn need to be parsed
-    }else{
-      header('Location: ' . $siteRoot . $splashPage['file']);
-	    exit();
-    }
-  }
+  header('Location: ' . $siteRoot . $maintenance['file']);
+	exit();
 }
 
 //check if production then set version.
@@ -56,22 +38,31 @@ if($globalLoader){
     $loader = true;
 }
 //page loader
-if(isset($pageLoader)){
+if(isset($pageLoader) && $pageLoader == true){
     $gsap   = true;
     $loader = true;
 }
-
-
 
 //=============================================================================
 //******************************helper functions******************************
 //=============================================================================
 
-function dump($value) {
+function dump($value, $desc) {
+echo '<br/><br/>';
+echo '=================DUMP=====================<br/>';
+if(isset($desc)){echo "<b>".$desc . "</b><br/>";}
 echo '<pre>';
 var_dump($value);
 echo '</pre>';
+echo '------------------------------------------';
+echo '<br/><br/>';
 };
+
+function space($x){
+  for ($i=0; $i < $x ; $i++) {
+    echo "<br/>";
+  }
+}
 
 function consoleDump($array){
   global $production;
@@ -206,8 +197,6 @@ function formTimeCheck($formTimeLimit, $next_page){
   }
 };
 
-
-
 //=============================================================================
 //********************************db functions********************************
 //=============================================================================
@@ -222,11 +211,11 @@ function checkBox($post){
 				}
 //check if boolean in db was set or not. then output input with checked or not
 //where $query = the mysql_query and $check is the column in the table queried
-function boxChecked($query,$name){
+function boxChecked($query, $name, $class = ""){
 		if($query === 0){
-			echo "<input type='checkbox' id=".$name." name=".$name.">";
+			echo "<input class='custom-control-input ".$class."' type='checkbox' id='".$name."' name='".$name."'>";
 		}elseif ($query === 1) {
-			echo "<input type='checkbox' id=".$name." name=".$name." checked>";
+			     echo "<input class='custom-control-input ".$class."' type='checkbox' id='".$name."' name='".$name."' checked>";
 		}
 	}
 
@@ -247,7 +236,8 @@ function dbClose(){
 //session timeout put into form action pages so page does not parse if timeout
 function sessionTimeout(){
   global $siteRoot;
-	$timeout = 3600;
+	//$timeout = 3600;
+  $timeout = 7200;
 	if(isset($_SESSION['timeout'])){
 		$sessionLife = time() - $_SESSION['timeout'];
 		if($sessionLife > $timeout){
@@ -267,14 +257,40 @@ function verificationCode(){
   return $rslt;
 }
 
-//generate a random password code for users to verify Account
-function generatePassword(){
-
-  //string of characters to shuffle
-  $permitted_chars = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  $randomStart = mt_rand(0, 53);
-  $rslt = substr(str_shuffle($permitted_chars), $randomStart, 8);
+//password syntax validation
+function passwordRegCheck($password){
+  $passwordRegEx = '/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W|_])(?=.*[^\s])[a-zA-Z\d\W_]{6,10}/';
+  $match = "";
+  $rslt = false;
+  preg_match($passwordRegEx, $password, $match);
+  if(count($match) == 1){
+    $rslt = true;
+  }
   return $rslt;
 }
 
+//generate and check a password
+function generatePassword(){
+
+  //string of characters to shuffle
+  $permitted_chars_capital    = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';   //26
+  $permitted_chars_lowercase  = 'abcdefghijklmnopqrstuvwxyz';   //26
+  $permitted_chars_numbers    = '1234567890';                   //10
+  $permitted_chars_special    = '~!@#$%^&*()_+-=]}[{;\:/?';   //24
+
+  $randomStart_capital        = mt_rand(0, 20);
+  $randomStart_lowercase      = mt_rand(0, 20);
+  $randomStart_numbers        = mt_rand(0, 5);
+  $randomStart_special        = mt_rand(0, 18);
+
+  $rslt_capital               = substr(str_shuffle($permitted_chars_capital), $randomStart_capital, 3);
+  $rslt_lowercase             = substr(str_shuffle($permitted_chars_lowercase), $randomStart_lowercase, 3);
+  $rslt_numbers               = substr(str_shuffle($permitted_chars_numbers), $randomStart_numbers, 3);
+  $rslt_special               = substr(str_shuffle($permitted_chars_special), $randomStart_special, 1);
+
+  $rslt                       = $rslt_capital . $rslt_lowercase . $rslt_numbers . $rslt_special;
+  $generatedPassword          = str_shuffle($rslt);
+
+  return $generatedPassword;
+}
 ?>

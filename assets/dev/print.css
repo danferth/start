@@ -1,0 +1,84 @@
+body{
+  font-family: sans-serif;
+  font-size:12px;
+}
+
+.removeForPrint{
+  display:none;
+}
+
+.header img{
+  width: 200px;
+  height:auto;
+}
+
+table{
+  border-collapse: collapse;
+}
+table thead tr{
+  border-bottom:2px solid black;
+}
+table tbody td{
+  border:none;
+  padding:3px 5px;
+}
+.printStl_total{
+  border-top:4px double black;
+}
+.totalLine{
+  border-top: 1px solid black;
+}
+.underline_solid{
+  border:none;
+  border-bottom: 1px solid black !important;
+}
+.underline_dashed{
+  border:none;
+  border-bottom: 1px dashed black !important;
+}
+.noBG{
+  background:transparent !important;
+}
+
+.shipTo{
+  border:1px solid grey;
+  border-radius:.25rem;
+  margin-bottom:2rem;
+  padding:.5rem 1rem;
+  width:40%;
+}
+.toShipNotes{
+  padding-top:.25rem;
+  margin-top:.5rem;
+  width:100%;
+  display:inline-block;
+  border-top:1px dashed black;
+}
+.printStl_notes{
+  text-decoration: underline;
+}
+.printStl_float{
+  float:left;
+  margin-top:2rem;
+  margin-bottom:2rem;
+  margin-right:1rem;
+  padding:.25rem 1rem;
+  width:40%;
+  height:10rem;
+  border:1px solid grey;
+  border-radius:.5rem;
+}
+.printStl_float h2{
+  padding-bottom:.25rem;
+  border-bottom:1px dashed black;
+  width:100%;
+  display:inline-block;
+}
+.wholeTotal{
+  font-weight: bold;
+}
+.footer{
+  margin-top:2rem;
+  border-top:1px dashed black;
+  clear:both;
+}

@@ -11,9 +11,14 @@ require_once '../../../config.php';
 $check1 = false;
 $check2 = false;
 $check3 = false;
+$check4 = false;
+$check5 = false;
+
+
 if($_SESSION['user'] != $_POST['user']){
 	session_destroy();
 	redirect('login');
+  exit;
 }else{
   $check1 = true;
 }
@@ -21,18 +26,34 @@ if($_SESSION['user'] != $_POST['user']){
 if(!isset($_POST['submit'])){
     //submit not set
     redirect('form-setup');
+    exit;
 }else{
   $check2 = true;
 }
 //check for matching passwords
 if($_POST['password'] != $_POST['confirmPassword']){
   sessionRedirect('form-setup','e','badpass');
+  exit;
 }else{
   $check3 = true;
 }
+//verify that new password is not same as old
+if(password_verify($_POST['password'], $_SESSION['original_password'])){
+  sessionRedirect('form-setup', 'e', 'samePass');
+  exit;
+}else{
+  $check4 = true;
+}
+//check for password syntax
+$passRegCheck = passwordRegCheck($_POST['password']);
+if($passRegCheck){
+  $check5 = true;
+}else{
+  sessionRedirect('admin', 'e', 'passSyntax');
+  exit;
+}
 
-
-if($check1 && $check2 && $check3){
+if($check1 && $check2 && $check3 && $check4 && $check5){
       //set a few variables we will need
 			$password = $_POST['password'];
       $user         = $_POST['user'];
@@ -44,6 +65,8 @@ if($check1 && $check2 && $check3){
       //start updating user for setup of account
       $prefShipContact_attn     = filter_var($_POST['prefShipContact_attn'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
       $prefShipContact_bizName  = filter_var($_POST['prefShipContact_bizName'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
+      $prefShipContact_phone    = filter_var($_POST['prefShipContact_phone'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
+      $prefShipContact_ext      = filter_var($_POST['prefShipContact_ext'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
       $prefShipTo_address1      = filter_var($_POST['prefShipTo_address1'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
       $prefShipTo_address2      = filter_var($_POST['prefShipTo_address2'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
       $prefShipTo_city          = filter_var($_POST['prefShipTo_city'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
@@ -60,12 +83,11 @@ if($check1 && $check2 && $check3){
   		$shipOptions_insurance = $_POST['shipOptions_insurance'];
       checkBox('shipOptions_useCustomerAccount');
   		$shipOptions_useCustomerAccount   = $_POST['shipOptions_useCustomerAccount'];
+      $shipOptions_customerShipperPref    = filter_var($_POST['shipOptions_customerShipperPref'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
       //customer wants to use their shipping account so....
       if($shipOptions_useCustomerAccount === 1){
-        $shipOptions_customerShipperPref    = filter_var($_POST['shipOptions_customerShipperPref'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
         $shipOptions_customerAccountNumber  = filter_var($_POST['shipOptions_customerAccountNumber'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
       }else{
-        $shipOptions_customerShipperPref    = "";
         $shipOptions_customerAccountNumber  = "";
       }
       //UPDATE user into db
@@ -74,6 +96,8 @@ if($check1 && $check2 && $check3){
         "setupCompletion"                   =>$userSetup,
         "prefShipContact_attn"              =>$prefShipContact_attn,
         "prefShipContact_bizName"           =>$prefShipContact_bizName,
+        "prefShipContact_phone"             =>$prefShipContact_phone,
+        "prefShipContact_ext"               =>$prefShipContact_ext,
         "prefShipTo_address1"               =>$prefShipTo_address1,
         "prefShipTo_address2"               =>$prefShipTo_address2,
         "prefShipTo_city"                   =>$prefShipTo_city,
@@ -92,6 +116,8 @@ if($check1 && $check2 && $check3){
                     setupCompletion                   = :setupCompletion,
                     prefShipContact_attn              = :prefShipContact_attn,
                     prefShipContact_bizName           = :prefShipContact_bizName,
+                    prefShipContact_phone             = :prefShipContact_phone,
+                    prefShipContact_ext               = :prefShipContact_ext,
                     prefShipTo_address1               = :prefShipTo_address1,
                     prefShipTo_address2               = :prefShipTo_address2,
                     prefShipTo_city                   = :prefShipTo_city,

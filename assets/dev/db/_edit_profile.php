@@ -31,6 +31,8 @@ if($check1 && $check2){
   //start updating user for edit of account
   $prefShipContact_attn     = filter_var($_POST['prefShipContact_attn'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
   $prefShipContact_bizName  = filter_var($_POST['prefShipContact_bizName'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
+  $prefShipContact_phone    = filter_var($_POST['prefShipContact_phone'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
+  $prefShipContact_ext      = filter_var($_POST['prefShipContact_ext'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
   $prefShipTo_address1      = filter_var($_POST['prefShipTo_address1'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
   $prefShipTo_address2      = filter_var($_POST['prefShipTo_address2'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
   $prefShipTo_city          = filter_var($_POST['prefShipTo_city'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
@@ -47,12 +49,11 @@ if($check1 && $check2){
   $shipOptions_insurance = $_POST['shipOptions_insurance'];
   checkBox('shipOptions_useCustomerAccount');
   $shipOptions_useCustomerAccount   = $_POST['shipOptions_useCustomerAccount'];
+  $shipOptions_customerShipperPref    = filter_var($_POST['shipOptions_customerShipperPref'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
   //customer wants to use their shipping account so....
   if($shipOptions_useCustomerAccount === 1){
-    $shipOptions_customerShipperPref    = filter_var($_POST['shipOptions_customerShipperPref'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
     $shipOptions_customerAccountNumber  = filter_var($_POST['shipOptions_customerAccountNumber'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
   }else{
-    $shipOptions_customerShipperPref    = "";
     $shipOptions_customerAccountNumber  = "";
   }
 
@@ -60,6 +61,8 @@ if($check1 && $check2){
   $dbUpdateData = [
     "prefShipContact_attn"              =>$prefShipContact_attn,
     "prefShipContact_bizName"           =>$prefShipContact_bizName,
+    "prefShipContact_phone"             =>$prefShipContact_phone,
+    "prefShipContact_ext"               =>$prefShipContact_ext,
     "prefShipTo_address1"               =>$prefShipTo_address1,
     "prefShipTo_address2"               =>$prefShipTo_address2,
     "prefShipTo_city"                   =>$prefShipTo_city,
@@ -76,6 +79,8 @@ if($check1 && $check2){
   $query = "UPDATE users
             SET prefShipContact_attn              = :prefShipContact_attn,
                 prefShipContact_bizName           = :prefShipContact_bizName,
+                prefShipContact_phone             = :prefShipContact_phone,
+                prefShipContact_ext               = :prefShipContact_ext,
                 prefShipTo_address1               = :prefShipTo_address1,
                 prefShipTo_address2               = :prefShipTo_address2,
                 prefShipTo_city                   = :prefShipTo_city,

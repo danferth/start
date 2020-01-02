@@ -12,6 +12,10 @@ $check1 = false;
 $check2 = false;
 $check3 = false;
 $check4 = false;
+$check5 = false;
+$check6 = false;
+
+
 //check for submit
 if(!isset($_POST['submit'])){
   //submit not set
@@ -21,25 +25,44 @@ if(!isset($_POST['submit'])){
 }
 //check if user is user
 if($_SESSION['user'] != $_POST['user']){
-	session_destroy();
+  session_destroy();
 	redirect('login');
+  exit;
 }else{
   $check2 = true;
 }
 //check for matching passwords
 if($_POST['password'] != $_POST['confirmPassword']){
   sessionRedirect('form-change-password','e','badpass');
+  exit;
 }else{
   $check3 = true;
 }
 //check current password
 if(!password_verify($_POST['currentPassword'], $_SESSION['original_password'])){
   sessionRedirect('form-change-password', 'e', 'badCurrentPass');
+  exit;
 }else{
   $check4 = true;
 }
+//make sure new and old pass are not the same
+if($_POST['currentPassword'] === $_POST['password']){
+  sessionRedirect('form-change-password', 'e', 'samePass');
+  exit;
+}else{
+  $check5 = true;
+}
+//check for password syntax
+$passRegCheck = passwordRegCheck($_POST['password']);
+if($passRegCheck){
+  $check6 = true;
+}else{
+  sessionRedirect('admin', 'e', 'passSyntax');
+  exit;
+}
 
-if($check1 && $check2 && $check3 && $check4){
+
+if($check1 && $check2 && $check3 && $check4 && $check5 && $check6){
   //set a few variables we will need
   $suppliedPass = $_POST['password'];
   $user         = $_SESSION['user'];
@@ -52,7 +75,7 @@ if($check1 && $check2 && $check3 && $check4){
   $dbUpdateData = [
     "password"      =>$hashedPass,
     "passwordReset" =>$passwordReset,
-    "userID"            =>$userID
+    "userID"        =>$userID
   ];
   $query = "UPDATE users
             SET pass          = :password,
@@ -66,4 +89,5 @@ if($check1 && $check2 && $check3 && $check4){
         session_destroy();
         redirect('login');
 }
+
  ?>

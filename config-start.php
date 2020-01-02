@@ -24,22 +24,27 @@ $maintenance  = [
                 ];
 
 //enable scripts
-$gsap           = true;
+$gsap           = false;
 $sweetalert     = true;
-$hammer         = true;
-$moment         = true;
-$localforage    = true;
+$hammer         = false;
+$moment         = false;
+$localforage    = false;
 
 //Vue.js
 $useVuejs       = false;
 
 //google stuff
 $googleAnalytics = "";
-$gmailUser       = "email@gmail.com";
-$gmailPass       = "gamilPassword";
-$my_email        = "return or reply email";
+$gmailUser       = "yourGmail@gmail.com";
+$gmailPass       = "gmailPassword";
+$my_email        = "email you want to be the sender";
 //global loader
 $globalLoader   = false;
+
+//regEx stuff for password
+$passwordRegEx = '(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W|_])(?=.*[^\s])[a-zA-Z\d\W_]{6,12}';
+
+
 
 //db settings
 /* *******************************************************
@@ -47,36 +52,17 @@ before setting $useDB to true make sure you have a db in place
 AND have assets/dev/db/_connection.php filled in
 with the appropriate variables to connect to your db
 ******************************************************* */
-$useDB          = false;
-$useLogin       = false;
-$fullSiteSecure = false;  //if set to true user MUST log in to see anything other than login.php
+$useDB          = true;
+$useLogin       = true;
+$fullSiteSecure = false;
 //This is the option array for password_hash()
+$bcryptOptions = [ "cost" => 12];
+
+//Default Time DateTimeZone
+date_default_timezone_set('America/Los_Angeles');
 
 // functions
 require_once 'functions.php';
-
-//uncomment block below and fill in variables
-
-/*
-
-// db CREDENTIALS===============================================================
-$db_name    = 'databaseName';
-$db_server  = 'localhost';
-$db_user    = 'databaseUser';
-$db_pass    = 'databaseUserPassword';
-// first user (admin) CREDENTIALS for install===================================
-$firstUserFname 		   = "firstAdmin";
-$firstUserLname 		   = "lastAdmin";
-$firstUser 					   = "admineamil@email.com";
-$firstUserCustID 		   = "123456";
-$password 				     = "password";
-
-// CONNECTION===================================================================
-$bcryptOptions = [ "cost" => 12];
+//uncomment _connection line below and go to file and fill in credentials
 require_once 'assets/build/db/_connection.php';
-
-// in set everything up in browser go to [website URL]/assets/build/db/_install.php
-//Then delete _install.php
-
-*/
 ?>

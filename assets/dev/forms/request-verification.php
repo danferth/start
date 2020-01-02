@@ -24,8 +24,9 @@ $body .= sprintf("<hr />");
 $body .= sprintf("\n<p>Hello %s,</p>\n",$_SESSION['name']);
 $body .= sprintf("\n<p>Use the link below to verify your email.  If the link does not work, copy and paste it into your bowsers address bar.</p>");
 $body .= sprintf("\n<p><a href='%s'>%s</a></p>",$verificationLink, $verificationLink);
-$body .= sprintf("\n<p>If you did not request this verification code please contact us.</p>");
-$body .= sprintf("<p>Thank you,</p>");
+$body .= sprintf("\n<p>If you did not request this verification code please contact Thomson Instrument Company at dan@htslabs.com.</p>");
+$body .= sprintf("<p>Thank you,<br/>");
+$body .= sprintf("Thomson Instrument Company</p>");
 $body .= sprintf("</body>");
 $body .= sprintf("</html>");
 
@@ -65,7 +66,8 @@ if (!$mail->send()) {
   sessionRedirect('index', 'e', 'emailFailed');
   exit();
 } else {
-    sessionRedirect('verify', 'm', 'verificationSent');
+    session_unset();
+    sessionRedirect('index', 'm', 'verificationSent');
 }
 
 }else{

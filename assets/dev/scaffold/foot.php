@@ -1,22 +1,35 @@
+<!-- closing container for page -->
+</div>
+
 <!-- BEGIN FOOTER -->
 
-<div class="footer">
-	<div class="grid-x">
-		<div class="cell small-12">
-			<p><i class="fa fa-copyright"></i> <?php echo date('Y'); ?> danferth</p>
+<div class="container footer mt-5 py-3 border-top border-primary">
+	<div class="row justify-content-center">
+		<div class="col text-center">
+			<small class='d-block mb-md-1 text-muted'><i class="fa fa-copyright"></i> <?php echo date('Y'); ?> START | danferth.com</small>
 		</div>
 	</div>
 </div>
 
 <!-- END FOOTER -->
 
-<!-- END grid-container from head.php -->
-</div>
+</div> <!-- END site-container-->
+
 
 <!-- jQuery -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <?php
+$activePage = $_SERVER['PHP_SELF'];
+echo "<script type='text/javascript'>";
+echo "var activePage ='" . $activePage . "';";
+
+if($hasForm){
+  echo "document.body.className += ' '+'hasForm'; ";
+}
+echo "</script>";
+
+
 	if($useVuejs){
 		if($production){
 			echo "<script src='https://cdn.jsdelivr.net/npm/vue'></script>";
@@ -30,7 +43,7 @@
 	}
 	if($sweetalert){
 		echo "<!-- SweetAlert2 -->";
-		echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@7.28.4/dist/sweetalert2.all.min.js' integrity='sha256-qtyU+b249rw/5PQ1KXGRtxjlgg6hfU2EK50YOlc0n50=' crossorigin='anonymous'></script>";
+    echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@8.14.0/dist/sweetalert2.min.js' integrity='sha256-KV2uV5Pn+Hwf/HUf1rwNmrLyCGuPjZwXYkE/QQj9/9o=' crossorigin='anonymous'></script>";
 	}
 	if($hammer){
 		echo "<!-- Hammer -->";
@@ -48,8 +61,8 @@
 ?>
 
 
-
-
+<!-- intro.js -->
+<script src="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/intro.min.js"></script>
 
 <!-- site.js-->
 <script type="text/javascript" src="assets/build/js/site.js?ver=<?php echo $GLOBALS['v']; ?>"></script>
@@ -79,10 +92,10 @@
     echo '});';
     echo '</script>';
   }
-?>
+ ?>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <?php
-if($production){
+if($googleAnalytics != ""){
 	echo "<script async src='https://www.googletagmanager.com/gtag/js?id=" . $googleAnalytics . "'></script>";
 	echo "<script>";
 	echo "  window.dataLayer = window.dataLayer || [];\n";
@@ -94,7 +107,7 @@ if($production){
 }else{
 	echo "<!-- no Google Analytics set up -->";
 }
-?>
+ ?>
 
 
 	</body>

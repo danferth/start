@@ -32,21 +32,17 @@ if($check1){
       sessionRedirect('form-reset-password', 'e', 'userNotExsist');
       exit();
     }elseif($checkForUser > 0){
-      $userData = $ru->fetch(PDO::FETCH_ASSOC);
+      $userData = $ru->fetch();
       $ru->closeCursor();
     }
 
 }
 
-      //set session so we know they have reset their password and useing temporary
-      //$_SESSION['passwordReset'] = "1";
-
       //set up for new password
       $password   = generatePassword();
       $hashedPass = password_hash($password, PASSWORD_BCRYPT, $bcryptOptions);
-      //start updating user for setup of account
 
-      //UPDATE user into db
+      //UPDATE user
       $dbUpdateData = [
         "password"  =>$hashedPass,
         "reset"     =>1,
@@ -69,6 +65,7 @@ $body .= sprintf("\nHello %s %s,<br />\n",$userData['Fname'], $userData['Lname']
 $body .= sprintf("\nYour temporary password is: <b>%s</b><br /><br/>\n",$password);
 $body .= sprintf("<b>NOTE:</b> When you log back in with this temporary password you will be prompted to reset your password to something more personal and easy to remember.<br/><br/>");
 $body .= sprintf("Thank you,<br />");
+$body .= sprintf("Thomson Instrument Company");
 $body .= sprintf("<br />-----------------<br />\n");
 $body .= sprintf("\nReceived: %s<br />\n",date("Y-m-d H:i:s"));
 $body .= sprintf("</body>");
@@ -106,7 +103,7 @@ if (!$mail->send()) {
 		exit();
 } else {
   session_unset();
-  session_destroy();
-  redirect('login');
+  //session_destroy();
+  sessionRedirect('login', 'm', 'paswordReset');
 }
  ?>

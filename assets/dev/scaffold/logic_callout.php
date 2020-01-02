@@ -16,6 +16,9 @@ if(isset($_SESSION['m'])){
     case 'emailSuccess':
       $siteMessage = "Your email has been sent. Thank you, we will get back to you as soon as we can.";
       break;
+    case 'paswordReset':
+      $siteMessage = "Your password has been reset and sent to the email we have on file. If the email does not reach your inbox please check your spam or junk folder.";
+      break;
     default:
       $siteMessage = "";
       break;
@@ -37,12 +40,6 @@ if(isset($_SESSION['e'])){
     case 'badpass':
       $siteError = "Passwords did not match, try again.";
       break;
-    case 'formtime':
-      $siteError = "That was a bit fast? Are you a bot?";
-      break;
-    case 'honey':
-      $siteError = "Looks like you left a few blank, try again please!";
-      break;
     case 'email':
       $siteError = "Looks like one or more of your emails are bad, try again.";
       break;
@@ -56,7 +53,7 @@ if(isset($_SESSION['e'])){
       $siteError = "Your current password did not match our records. Please try again.";
       break;
     case 'alreadyHaveQuoteNUM':
-      $siteError = "A quote # has already been submitted. Please finish verification before entering a new quote.";
+      $siteError = "Quote #".$_SESSION['quoteNUM']." has already been submitted. Please finish proccessing before entering a new quote.";
       break;
     case 'badVerification':
       $siteError = "your verification code did not match the one we have on file.";
@@ -68,7 +65,7 @@ if(isset($_SESSION['e'])){
       $siteError = "There has been a system error. An email has been sent to our development team, so they can assess and fix any issues. Thank you.";
       break;
     case 'emailFailed':
-      $siteError = "The email system seems to have failed! We apologize for this and will star working on it.";
+      $siteError = "The email system seems to have failed! We apologize for this and will start working on it.";
       break;
     case 'requiredInput':
       $siteError = "Oops, somehow you seemed to have missed some required inputs!";
@@ -80,7 +77,22 @@ if(isset($_SESSION['e'])){
       $siteError = "Interesting....";
       break;
     case 'formTime':
-      $siteError = "That was a bit quick, like to quick! Are you a bot by chance?";
+      $siteError = "That was a bit quick, like too quick! Are you a bot by chance?";
+      break;
+    case 'invalidQuote':
+      $siteError = "the Quote number you subited is either invalid or not assigned to your company ID. Please enter a valid quote number.";
+      break;
+    case 'noItemsSelected':
+      $siteError = "No items were selected for purchase.";
+      break;
+    case 'acumaticaError':
+      $siteError = "There has been an internal error, please try your request again. If the problem persist, please use the contact form to let us know so we can fix the issue.";
+      break;
+    case 'samePass':
+      $siteError = "New password can not be the same as current password.";
+      break;
+    case 'passSyntax':
+      $siteError = "Password does not follow the rules. It must be between 6-8 characters and have at least one capital and lowercase letter, a number, and one of the following special characters ~! @ # $ % ^ & * ( ) _ + - = , . < > ?";
       break;
     default:
       $siteError = "";

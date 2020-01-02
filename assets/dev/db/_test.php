@@ -4,33 +4,23 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 require_once '../../../config.php';
 
-echo "you are on the page for db tests<br/><br/><br/>";
+echo "<p>you are on the page for db tests</p>";
+echo "<p><a href='".$siteRoot."index.php'>Home</a></p>";
+
 //******************************************************************************
 //******************************************************************************
 //**********************************START HERE**********************************
 //******************************************************************************
 //******************************************************************************
+echo "<p>================DUMP==================</p><br/><br/><br/>";
 
-// $q = $db->query("SELECT * FROM users");
-// foreach($q as $user){
-//   echo $user['Fname']." ".$user['Lname']."<br/>";
-// }
-// $q->closeCursor();
-//
-// echo "<br/><br/>";
-//
-// $q = $db->query("SELECT * FROM users");
-// $rslt = $q->fetchAll();
-// dump($rslt);
 
-echo $currentPage;
 
-dump($_SERVER);
+
+
 
 
 echo "<br/><br/><br/>Done";
 
 
-
-
- ?>
+?>

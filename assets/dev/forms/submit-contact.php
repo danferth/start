@@ -11,11 +11,12 @@ array_walk($_POST, 'trim_value');
 //Honeypot variable
 $honeypotJS = filter_var($_POST['your-email247'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
 //Email variables
-$fname   = filter_var($_POST['fname'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
-$lname   = filter_var($_POST['lname'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
-$company = filter_var($_POST['company'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
-$message = filter_var($_POST['message'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
-$email   = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+$fname          = filter_var($_POST['fname'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
+$lname          = filter_var($_POST['lname'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
+$company        = filter_var($_POST['company'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
+$message        = filter_var($_POST['message'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_ENCODE_HIGH);
+$email          = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+$accountRequest = checkBox('accountRequest');
 //==========================================================
 //Let's check for a few things and then go forward shall we
 //==========================================================
@@ -35,20 +36,25 @@ checkEmailValid($checkTheseEmails, $next_page);
 //put honeypots into array
 $honeypots = array($honeypotJS);
 checkHoneypot($honeypots,  $next_page);
+
 //all must be good, lets send a few emails==============================
 $body  = sprintf("<html>");
 $body .= sprintf("<body>");
-$body .= sprintf("<h2>Contact from order website</h2>\n");
+$body .= sprintf("<h2>Contact from START website</h2>\n");
 $body .= sprintf("<hr />");
-$body .= sprintf("\nEmail: <strong>%s</strong><br />\n",$email);
-$body .= sprintf("\nName: <strong>%s %s</strong><br />\n",$fname, $lname);
-$body .= sprintf("<br />");
-$body .= wordwrap(sprintf("\n<b>Message:</b> ".$message),75,"<br/>");
-$body .= sprintf("<br /><hr />");
-$body .= sprintf("For internal use:<br />\n");
-$body .= sprintf("<br />-----------------<br />\n");
-$body .= sprintf("\nSender's IP: %s<br />\n", $_SERVER['REMOTE_ADDR']);
-$body .= sprintf("\nReceived: %s<br />\n",date("Y-m-d H:i:s"));
+$body .= sprintf("\n<p>Email: <b>%s</b></p>\n",$email);
+$body .= sprintf("\n<p>Name: <b>%s %s</b></p>\n",$fname, $lname);
+
+if($_POST['accountRequest'] > 0){
+  $body .= sprintf("\n<p><b>CUSTOMER HAS REQUESTED AN ACCOUNT!!!</b></p>");
+}
+
+$body .= wordwrap(sprintf("\n<p><b>Message:</b> ".$message),75,"</p>");
+$body .= sprintf("<hr />");
+$body .= sprintf("<p>For internal use:</p>\n");
+$body .= sprintf("-----------------<br />\n");
+$body .= sprintf("\n<p>Sender's IP: %s<br/>\n", $_SERVER['REMOTE_ADDR']);
+$body .= sprintf("\nReceived: %s</p>\n",date("Y-m-d H:i:s"));
 $body .= sprintf("</body>");
 $body .= sprintf("</html>");
 
@@ -77,7 +83,7 @@ $mail->setFrom($email, $fname." ".$lname);
 $mail->addReplyTo($email, $fname." ".$lname);
 $mail->addAddress($my_email);
 //$mail->Subject = $email_subject;
-$mail->Subject = "Order Site Contact";
+$mail->Subject = "START Site Contact";
 $mail->msgHTML($body);
 if (!$mail->send()) {
   sessionRedirect('index', 'e', 'emailFailed');
@@ -85,5 +91,4 @@ if (!$mail->send()) {
 } else {
     sessionredirect($next_page, 'm', 'emailSuccess');
 }
-
 ?>

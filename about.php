@@ -1,25 +1,27 @@
 <?php
-  require_once 'config.php';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
   //set title and description for page
-  $title          = 'about';
-  $description    = 'A bit about us';
+  $title          = 'TIC | About';
+  $description    = 'About Thomson Instrument Company';
   $pageLoader     = false;
   $hasForm        = false;
   //for login use only
-  $restrictedPage = true;
+  $restrictedPage = false;
   $adminOnly      = false;
 
+  require_once 'config.php';
   include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/head.php';
 ?>
 
 <!-- START -->
-<div class="page-wrap grid-x" style="height:90vh;">
-  <div class="cell small-12 medium-8">
-    <h3>About</h3>
-      </div>
+<div class="page-wrap row">
 
-
+<div class="col-12">
+  <p>this is the about us page. Go nuts!</p>
 </div>
-<!-- END -->
+
+</div> <!-- END -->
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/foot.php'; ?>

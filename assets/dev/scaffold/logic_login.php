@@ -5,9 +5,9 @@ if($useDB && $useLogin){
     //user is logged in, check timeout and then set timeout
     sessionTimeout();
     $_SESSION['timeout'] = time();
-    $welcomeMessage = "<b>" . $_SESSION['name'] . "</b> <i>is logged in!</i>";
+    $welcomeMessage = "Hello, <b>" . $_SESSION['name'] . "</b>";
     //send to index if trying to go to login
-    if($title === 'login'){
+    if($title === 'Quick Order | Login'){
       redirect('index');
     }
     //if page is $adminOnly and they are not admin send to index
@@ -19,19 +19,19 @@ if($useDB && $useLogin){
 
     //User has not set up account yet
     if($_SESSION['setup'] === 0){
-      if($_SESSION['verified'] == 0 && $title !== "verify"){
+      if($_SESSION['verified'] == 0 && $title !== "Profile | Verify"){
         redirect('verify');
       }
-      if($_SESSION['verified'] == 1 && $title !== "Account Setup"){
+      if($_SESSION['verified'] == 1 && $title !== "Profile | Setup"){
         redirect('form-setup');
       }
     }
     //user has set up account restrict verify and setup pages
     if($_SESSION['setup'] === 1){
-      if($title === 'Account Setup'){
+      if($title === 'Profile | Setup'){
         redirect('index');
       }
-      if($title === "verify"){
+      if($title === "Profile | Verify"){
         redirect('index');
       }
     }
@@ -44,14 +44,14 @@ if($useDB && $useLogin){
     }
   //else NOT logged in
   }elseif(!isset($_SESSION['secure'])){
-    $welcomeMessage = "";
+    $welcomeMessage = "Have an account?";
     if(isset($_SESSION['timeout'])){
       unset($_SESSION['timeout']);
     }
 
     //if sit is set to $fullSiteSecure redirect to login
     if($fullSiteSecure){
-      if($title !== 'login'){
+      if($title !== 'Quick Order | Login'){
         redirect('login');
       }
       //not full site but has restricted page
