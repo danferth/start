@@ -29,14 +29,6 @@ if($hasForm){
 }
 echo "</script>";
 
-
-	if($useVuejs){
-		if($production){
-			echo "<script src='https://cdn.jsdelivr.net/npm/vue'></script>";
-		}else{
-			echo "<script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>";
-		}
-	}
 	if($gsap){
 		echo "<!-- GSAP -->";
 		echo "<script src='https://cdn.jsdelivr.net/npm/gsap@2.0.2/umd/TweenMax.min.js'></script>";
@@ -44,18 +36,6 @@ echo "</script>";
 	if($sweetalert){
 		echo "<!-- SweetAlert2 -->";
     echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@8.14.0/dist/sweetalert2.min.js' integrity='sha256-KV2uV5Pn+Hwf/HUf1rwNmrLyCGuPjZwXYkE/QQj9/9o=' crossorigin='anonymous'></script>";
-	}
-	if($hammer){
-		echo "<!-- Hammer -->";
-		echo "<script src='https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js' integrity='sha256-eVNjHw5UeU0jUqPPpZHAkU1z4U+QFBBY488WvueTm88=' crossorigin='anonymous'></script>";
-	}
-	if($moment){
-		echo "<!-- moment -->";
-		echo '<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>';
-	}
-	if($localforage){
-		echo "<!-- localforage -->";
-		echo '<script src="https://cdn.jsdelivr.net/npm/localforage@1.7.2/dist/localforage.min.js" integrity="sha256-vxBB/kklMCqUCIdrghNX+n8Y5rQtVIWSqaiVBSUBI64=" crossorigin="anonymous"></script>';
 	}
 
 ?>

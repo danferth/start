@@ -45,12 +45,6 @@ include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/logic_callout.php';
         <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@2.0.3/dark/dark.min.css" integrity="sha256-1WVqXl+b1LYn/AjKAx4Jg8+p0sdD4UQLzY1JYS6S/lk=" crossorigin="anonymous"> -->
         <!-- swal2 borderless theme -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@2.0.3/borderless/borderless.min.css" integrity="sha256-MOmeQsEYme0ThyBaGh2raVSmFWThv6ZQq7dQo75x0ug=" crossorigin="anonymous">
-        <!-- intro.js CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/introjs.css" integrity="sha256-OYXGS5m4oWZAAqoAKpf7Y3bIdzdd9jBfly/xCavEpGw=" crossorigin="anonymous">
-        <!-- intro.js MODERN theme -->
-        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/themes/introjs-modern.css" integrity="sha256-YQ16Ch8sowpl0SpkX7M2f/sSi+N+Vocexlp1nPbCTgA=" crossorigin="anonymous"> -->
-        <!-- Animate.css -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
         <!-- site css files for print and screan -->
         <link rel="stylesheet" href="/assets/build/css/site.css?ver=<?php echo $v; ?>" type="text/css" media="screen, projection" >
         <link rel="stylesheet" href="/assets/build/css/print.css?ver=<?php echo $v; ?>" type="text/css" media="print" >
@@ -99,5 +93,5 @@ include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/logic_callout.php';
 <?php include $_SERVER['DOCUMENT_ROOT'].'/assets/build/scaffold/nav.php'; ?>
 <!-- END container from head.php -->
 </div>
-<!-- this is the cell for the page -->
+<!-- this is the container for the page -->
 <div class="container">

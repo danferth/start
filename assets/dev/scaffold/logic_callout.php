@@ -52,17 +52,11 @@ if(isset($_SESSION['e'])){
     case 'badCurrentPass':
       $siteError = "Your current password did not match our records. Please try again.";
       break;
-    case 'alreadyHaveQuoteNUM':
-      $siteError = "Quote #".$_SESSION['quoteNUM']." has already been submitted. Please finish proccessing before entering a new quote.";
-      break;
     case 'badVerification':
       $siteError = "your verification code did not match the one we have on file.";
       break;
     case 'userNotExsist':
       $siteError = "We are sorry but a user by that name does not exist in our system.";
-      break;
-    case 'systemError';
-      $siteError = "There has been a system error. An email has been sent to our development team, so they can assess and fix any issues. Thank you.";
       break;
     case 'emailFailed':
       $siteError = "The email system seems to have failed! We apologize for this and will start working on it.";
@@ -78,15 +72,6 @@ if(isset($_SESSION['e'])){
       break;
     case 'formTime':
       $siteError = "That was a bit quick, like too quick! Are you a bot by chance?";
-      break;
-    case 'invalidQuote':
-      $siteError = "the Quote number you subited is either invalid or not assigned to your company ID. Please enter a valid quote number.";
-      break;
-    case 'noItemsSelected':
-      $siteError = "No items were selected for purchase.";
-      break;
-    case 'acumaticaError':
-      $siteError = "There has been an internal error, please try your request again. If the problem persist, please use the contact form to let us know so we can fix the issue.";
       break;
     case 'samePass':
       $siteError = "New password can not be the same as current password.";

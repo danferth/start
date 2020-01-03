@@ -29,7 +29,6 @@ S:::::::::::::::SS     tt:::::::::::tt a::::::::::aa:::ar:::::r                 
 - Bootstrap `SASS` & `JS` is baked in the workflow
 - `GSAP` and `FontAwesome` just cause their awesome
 - `swal2`, I ain't reinventing the wheel for a popup
-- also has `localforage`, `hammer`, & `moment` if you need it
 - all js 3rd parties can be turned on or off through config.php
 - easy versioning of `css` & `js` files
 - Oh and default functions for forms, databases using `PDO`
@@ -37,7 +36,6 @@ S:::::::::::::::SS     tt:::::::::::tt a::::::::::aa:::ar:::::r                 
 - secure login (bcrypt) and user profiles
 - database and login system can be turned off and all files removed with a simple `gulp` command
 - Maintenance mode for when you're doing maintenance
-- Splash page more - displays a splash page to gather emails before the site is live
 - Install script to set up database and first admin user
 - Use all of it or turn off everything
 - Yeah this is starting to get out of hand
@@ -69,12 +67,8 @@ nodb               = removes all files needed for db usage.
 - Profile page with user edit
 - admin page allows user addition/deletion
 
-## Splash & Maintenance modes
+## Maintenance modes
 When you put the site in `maintenance mode` it will redirect to `maintenance.php` displaying a message that the site is in maintenance. You can use this for whatever reason you need, database updates. uploading a new version of the site.....
-
-When the site is in `splashPage mode` it will redirect to a splash page to gather emails. This is the page that you would set up and deploy when the site is still under construction to gather emails and use as a placeholder before the full site is ready.
-
-The features can be used or ignored but are there if you need them
 
 ## Page Loader
 If you have a site that will take a bit to load or your fighting a bit of `FOUC` you can initialize the `pageloader` either for the full site or just a page or two.
