@@ -50,6 +50,7 @@ function helpTask(cb){
   console.log("build              = css, js, & image + moves scaffold and other folders to build".bold.green);
   console.log("package            = all build files and files in root copied to package/".bold.blue);
   console.log("clean              = deletes package and build directories and package.zip".bold.blue);
+  console.log("nodb               = removes all files needed for db usage.".red);
   console.log("****************************************************************************************".bold.white.bgYellow);
   cb();
 };
@@ -193,6 +194,15 @@ function cleanTask(cb){
   cb();
 };
 exports.clean = cleanTask;
+//=======NODB=================================================================================
+function nodbTask(cb){
+  del('verify/**');
+  del(['verify.php', 'login.php', 'form-setup.php', 'form-reset-password.php', 'form-edit-profile.php', 'form-change-password.php', 'admin.php', 'profile.php', 'view-user.php']);
+  del('assets/dev/db/**/**');
+  del('assets/dev/forms/request-verification.php');
+  cb();
+};
+exports.nodb = nodbTask;
 //=======watch================================================================================
 function watchTask(){
   gulp.watch(css_src + '/**/*.scss', cssTask);
